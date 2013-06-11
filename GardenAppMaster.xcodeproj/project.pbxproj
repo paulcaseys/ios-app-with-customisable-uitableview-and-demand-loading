@@ -474,6 +474,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GardenAppMaster/GardenAppMaster-Prefix.pch";
 				INFOPLIST_FILE = "GardenAppMaster/GardenAppMaster-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -485,6 +486,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GardenAppMaster/GardenAppMaster-Prefix.pch";
 				INFOPLIST_FILE = "GardenAppMaster/GardenAppMaster-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -543,6 +545,7 @@
 				46567833176705D500CD8D3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46567834176705D500CD8D3B /* Build configuration list for PBXNativeTarget "GardenAppMasterTests" */ = {
 			isa = XCConfigurationList;
@@ -551,6 +554,7 @@
 				46567836176705D500CD8D3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

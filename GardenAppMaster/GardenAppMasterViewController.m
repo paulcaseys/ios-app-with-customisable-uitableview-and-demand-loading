@@ -99,7 +99,49 @@
     NSLog(@"This is it: %@",eMyString);
     
     // traverse
-    NSLog(@"This is it: %@", [[dict objectForKey:@"pagination"] valueForKey:@"next_max_id"]);
+    //NSLog(@"This is it: %@", [dict objectForKey:@"data"]);
+    
+    //NSArray *myList = [[dict objectForKey:@"data"] objectForKey:@"id"];
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://api.instagram.com/v1/users/688542/media/recent?count=%22+me.imageCount+%22&access_token=688542.1fb234f.b393aba051d54bb9a03714ca63594171&callback=?"]];
+    NSError *err;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:data
+                          options:kNilOptions
+                          error:&err];
+    
+    NSMutableArray *array = json[@"data"];
+    
+    NSLog(@"%@", [array objectAtIndex:0]);
+    
+    for (NSDictionary *item in array){
+        NSString *created_time = [item valueForKey:@"created_time"];
+        NSLog(@"created_time - %@",created_time);
+        
+        // You can also get nested properties like this
+        //NSString *projectName = [item valueForKeyPath:@"project.name"];
+    }
+    
+    /*if ([json isKindOfClass:[NSArray class]]) {
+        NSLog(@"its an array!");
+        NSArray *jsonArray = (NSArray *)json;
+        NSLog(@"jsonArray - %@",jsonArray);
+    }
+    else {
+        NSLog(@"its probably a dictionary");
+        NSDictionary *jsonDictionary = (NSDictionary *)json;
+        NSLog(@"jsonDictionary - %@",jsonDictionary);
+    }*/
+    /*NSDictionary *schedule_dict = [json objectForKey:@"data"];
+    NSArray *items = [schedule_dict objectForKey:@"created_time"];
+    NSLog(@"items %@", items);
+    
+    NSDictionary *jsonObject = [dict objectForKey:@"data"];
+    NSMutableArray *myList = [jsonObject objectForKey:@"created_time"];
+    NSLog(@"myList %@", myList);
+    NSLog(@"This is it: %@", myList);
+     */
+    
+    
     
     // adds the next_max_id to the text
 	texter.text = [[dict objectForKey:@"pagination"] valueForKey:@"next_max_id"];
