@@ -9,9 +9,22 @@
 #import <UIKit/UIKit.h>
 
 @class GardenAppDetailViewController;
+@class SBJsonStreamParser;
+@class SBJsonStreamParserAdapter;
 
-@interface GardenAppMasterViewController : UITableViewController
 
-@property (strong, nonatomic) GardenAppDetailViewController *detailViewController;
+
+@interface GardenAppMasterViewController : UITableViewController {
+    
+    IBOutlet UITextView *texter;
+    
+    NSURLConnection *theConnection;
+    SBJsonStreamParser *parser;
+    SBJsonStreamParserAdapter *adapter;
+}
+
+//- (void)go;
+
+//@property (strong, nonatomic) GardenAppDetailViewController *detailViewController;
 
 @end

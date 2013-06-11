@@ -10,8 +10,12 @@
 
 #import "GardenAppDetailViewController.h"
 
+#import "SBJson.h"
+
+
+
 @interface GardenAppMasterViewController () {
-    NSMutableArray *_objects;
+    //NSMutableArray *_objects;
 }
 @end
 
@@ -30,18 +34,121 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    /*self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    */
+    // PAULS CODE
+    [self go];
+    
 }
+
+#pragma mark Actions
+
+- (void)go {
+	
+	// We don't want *all* the individual messages from the
+	// SBJsonStreamParser, just the top-level objects. The stream
+	// parser adapter exists for this purpose.
+	adapter = [[SBJsonStreamParserAdapter alloc] init];
+	
+	// Set ourselves as the delegate, so we receive the messages
+	// from the adapter.
+	adapter.delegate = self;
+	
+	// Create a new stream parser..
+	parser = [[SBJsonStreamParser alloc] init];
+    
+	// .. and set our adapter as its delegate.
+	parser.delegate = adapter;
+	
+	// Normally it's an error if JSON is followed by anything but
+	// whitespace. Setting this means that the parser will be
+	// expecting the stream to contain multiple whitespace-separated
+	// JSON documents.
+	parser.supportMultipleDocuments = YES;
+	
+	NSString *url = @"cosmos.is/api/service/data/format/json/?project_name=SummerAtTarget&project_password=6CB4816A23A965B5DFD58E45F4C23&table=unique_references&batch=1&batchSize=6&whereConditionArray=project_id||9&select=*&orderBy=vote_count||desc&callback=?";
+	
+	NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:url]
+											  cachePolicy:NSURLRequestUseProtocolCachePolicy
+										  timeoutInterval:60.0];
+	
+	theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    
+    #define kMyString @"This is my string text!"
+    NSLog(@"This is it: %@",kMyString);
+    
+	texter.text = @"...";
+}
+
+
+
+#pragma mark SBJsonStreamParserAdapterDelegate methods
+
+- (void)parser:(SBJsonStreamParser *)parser foundArray:(NSArray *)array {
+    [NSException raise:@"unexpected" format:@"Should not get here"];
+}
+
+- (void)parser:(SBJsonStreamParser *)parser foundObject:(NSDictionary *)dict {
+	texter.text = [dict objectForKey:@"text"];
+}
+
+#pragma mark NSURLConnectionDelegate methods
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	NSLog(@"Connection didReceiveResponse: %@ - %@", response, [response MIMEType]);
+}
+/*
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+	NSLog(@"Connection didReceiveAuthenticationChallenge: %@", challenge);
+	
+	NSURLCredential *credential = [NSURLCredential credentialWithUser:username.text
+															 password:password.text
+														  persistence:NSURLCredentialPersistenceForSession];
+	
+	[[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	NSLog(@"Connection didReceiveData of length: %u", data.length);
+	
+	// Parse the new chunk of data. The parser will append it to
+	// its internal buffer, then parse from where it left off in
+	// the last chunk.
+	SBJsonStreamParserStatus status = [parser parse:data];
+	
+	if (status == SBJsonStreamParserError) {
+        texter.text = [NSString stringWithFormat: @"The parser encountered an error: %@", parser.error];
+		NSLog(@"Parser error: %@", parser.error);
+		
+	} else if (status == SBJsonStreamParserWaitingForData) {
+		NSLog(@"Parser waiting for more data");
+	}
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"Connection failed! Error - %@ %@",
+          [error localizedDescription],
+          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+}
+*/
+///
+
+
+
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/*
 - (void)insertNewObject:(id)sender
 {
     if (!_objects) {
@@ -97,22 +204,6 @@
     }
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (!self.detailViewController) {
@@ -121,6 +212,6 @@
     NSDate *object = _objects[indexPath.row];
     self.detailViewController.detailItem = object;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
-}
+}*/
 
 @end
