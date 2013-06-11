@@ -48,6 +48,7 @@
 
 - (void)go {
 	
+    
 	// We don't want *all* the individual messages from the
 	// SBJsonStreamParser, just the top-level objects. The stream
 	// parser adapter exists for this purpose.
@@ -55,7 +56,7 @@
 	
 	// Set ourselves as the delegate, so we receive the messages
 	// from the adapter.
-	adapter.delegate = self;
+	adapter.delegate = (id)self;
 	
 	// Create a new stream parser..
 	parser = [[SBJsonStreamParser alloc] init];
@@ -69,7 +70,7 @@
 	// JSON documents.
 	parser.supportMultipleDocuments = YES;
 	
-	NSString *url = @"cosmos.is/api/service/data/format/json/?project_name=SummerAtTarget&project_password=6CB4816A23A965B5DFD58E45F4C23&table=unique_references&batch=1&batchSize=6&whereConditionArray=project_id||9&select=*&orderBy=vote_count||desc&callback=?";
+	NSString *url = @"https://api.instagram.com/v1/users/688542/media/recent?count=%22+me.imageCount+%22&access_token=688542.1fb234f.b393aba051d54bb9a03714ca63594171&callback=?";//@"https://stream.twitter.com/1/statuses/sample.json";//@"http://cosmos.is/api/service/data/format/json/?project_name=SummerAtTarget&project_password=6CB4816A23A965B5DFD58E45F4C23&table=unique_references&batch=1&batchSize=6&whereConditionArray=project_id||9&select=*&orderBy=vote_count||desc&callback=?";
 	
 	NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:url]
 											  cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -87,12 +88,22 @@
 
 #pragma mark SBJsonStreamParserAdapterDelegate methods
 
-- (void)parser:(SBJsonStreamParser *)parser foundArray:(NSArray *)array {
+- (void)parser:(SBJsonStreamParser *)parser foundArray:(NSArray *)array {    
     [NSException raise:@"unexpected" format:@"Should not get here"];
 }
 
 - (void)parser:(SBJsonStreamParser *)parser foundObject:(NSDictionary *)dict {
-	texter.text = [dict objectForKey:@"text"];
+    
+    // log 
+    #define eMyString @"foundObject"
+    NSLog(@"This is it: %@",eMyString);
+    
+    // traverse
+    NSLog(@"This is it: %@", [[dict objectForKey:@"pagination"] valueForKey:@"next_max_id"]);
+    
+    // adds the next_max_id to the text
+	texter.text = [[dict objectForKey:@"pagination"] valueForKey:@"next_max_id"];
+    
 }
 
 #pragma mark NSURLConnectionDelegate methods
@@ -100,20 +111,23 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	NSLog(@"Connection didReceiveResponse: %@ - %@", response, [response MIMEType]);
 }
-/*
+
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
 	NSLog(@"Connection didReceiveAuthenticationChallenge: %@", challenge);
 	
-	NSURLCredential *credential = [NSURLCredential credentialWithUser:username.text
+	/*NSURLCredential *credential = [NSURLCredential credentialWithUser:username.text
 															 password:password.text
 														  persistence:NSURLCredentialPersistenceForSession];
 	
 	[[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
+     */
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 	NSLog(@"Connection didReceiveData of length: %u", data.length);
-	
+    //NSString *str = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+    //NSLog(@"Data: %@", str );
+    
 	// Parse the new chunk of data. The parser will append it to
 	// its internal buffer, then parse from where it left off in
 	// the last chunk.
@@ -126,6 +140,7 @@
 	} else if (status == SBJsonStreamParserWaitingForData) {
 		NSLog(@"Parser waiting for more data");
 	}
+    /* */
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -136,7 +151,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 }
-*/
+
 ///
 
 

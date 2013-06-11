@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 @class GardenAppDetailViewController;
 @class SBJsonStreamParser;
@@ -21,6 +22,20 @@
     NSURLConnection *theConnection;
     SBJsonStreamParser *parser;
     SBJsonStreamParserAdapter *adapter;
+}
+
+@end
+
+@interface Person : NSObject
+{
+    NSString *firstName;
+    NSString *lastName;
+    
+    NSInteger age;
+    
+    NSDictionary *address;
+    
+    NSArray *phoneNumbers;
 }
 
 //- (void)go;
