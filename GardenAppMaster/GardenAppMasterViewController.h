@@ -24,22 +24,6 @@
     SBJsonStreamParserAdapter *adapter;
 }
 
-@end
-
-@interface Person : NSObject
-{
-    NSString *firstName;
-    NSString *lastName;
-    
-    NSInteger age;
-    
-    NSDictionary *address;
-    
-    NSArray *phoneNumbers;
-}
-
-//- (void)go;
-
-//@property (strong, nonatomic) GardenAppDetailViewController *detailViewController;
+@property (strong, nonatomic) GardenAppDetailViewController *detailViewController;
 
 @end
