@@ -10,9 +10,6 @@
 
 #import "GardenAppDetailViewController.h"
 
-#import "SBJson.h"
-
-
 
 @interface GardenAppMasterViewController () {
     NSMutableArray *_objects;
@@ -34,20 +31,19 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    /**/
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-    // PAULS CODE
-    [self go];
+    // initialise load
+    [self initialiseFeedLoad];
     
 }
 
 #pragma mark Actions
 
-- (void)go {
+- (void)initialiseFeedLoad {
 	
     
 	NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://api.instagram.com/v1/users/688542/media/recent?count=%22+me.imageCount+%22&access_token=688542.1fb234f.b393aba051d54bb9a03714ca63594171&callback=?"]];
