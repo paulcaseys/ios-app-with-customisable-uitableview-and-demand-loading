@@ -68,12 +68,25 @@
         // You can also get nested properties like this
         NSString *imgLow = [item valueForKeyPath:@"images.low_resolution.url"];
         NSLog(@"imgLow - %@",imgLow);
+        [self insertNewItemFromFeed:imgLow];
 
     }
     
 	texter.text = @"...";
 }
 
+- (void)insertNewItemFromFeed:(NSString *)string
+{
+    if (string == nil) string = @"Default Value";
+    
+    if (!_objects) {
+        _objects = [[NSMutableArray alloc] init];
+    }
+    NSString *str = string;
+    [_objects insertObject:str atIndex:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 
 
 
@@ -89,7 +102,8 @@
     if (!_objects) {
         _objects = [[NSMutableArray alloc] init];
     }
-    [_objects insertObject:[NSDate date] atIndex:0];
+    NSString *str = @"whatevs";
+    [_objects insertObject:str atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
