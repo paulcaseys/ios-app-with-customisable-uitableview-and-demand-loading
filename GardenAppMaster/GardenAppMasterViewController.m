@@ -10,6 +10,8 @@
 
 #import "GardenAppDetailViewController.h"
 
+BOOL animationRunning;
+
 
 @interface GardenAppMasterViewController () {
     NSMutableArray *_objects;
@@ -39,6 +41,33 @@
     // initialise load
     [self initialiseFeedLoad];
     
+    // initialise animation
+    animationRunning = YES;
+    [self fadeOut:nil finished:nil context:nil];
+    
+}
+
+
+- (void) fadeOut:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:2];
+    [UIView  setAnimationDelegate:self];
+    if(animationRunning){
+        [UIView setAnimationDidStopSelector:@selector(fadeIn:finished:context:) ];
+    }
+    [texter setAlpha:0.00];
+    [UIView commitAnimations];
+}
+
+- (void) fadeIn:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:2];
+    [UIView  setAnimationDelegate:self];
+    if(animationRunning){
+        [UIView setAnimationDidStopSelector:@selector(fadeOut:finished:context:) ];
+    }
+    [texter setAlpha:1.00];
+    [UIView commitAnimations];
 }
 
 #pragma mark Actions
