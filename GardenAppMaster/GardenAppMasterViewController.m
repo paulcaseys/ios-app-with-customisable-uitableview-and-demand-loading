@@ -42,8 +42,8 @@ BOOL animationRunning;
     [self initialiseCosmosFeedLoad];
     
     // initialise animation
-    animationRunning = YES;
-    [self fadeOut:nil finished:nil context:nil];
+    //animationRunning = YES;
+    //[self fadeOut:nil finished:nil context:nil];
     
 }
 
@@ -101,11 +101,14 @@ BOOL animationRunning;
         NSString *img75 = @"";
         for (NSDictionary *uploaded_image in uploaded_images){            
             img75 = [uploaded_image valueForKey:@"uploaded_image_path_75"];
-            NSLog(@"img75: %@",img75);
+            //NSLog(@"img75: %@",img75);
         }
         
         [dictionary setValue:img75 forKey:@"img75"];
         
+        [self insertNewItemFromFeed:dictionary];
+        [self insertNewItemFromFeed:dictionary];
+        [self insertNewItemFromFeed:dictionary];
         [self insertNewItemFromFeed:dictionary];
     }
 	texter.text = @"...";
@@ -195,15 +198,16 @@ BOOL animationRunning;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
         
+        NSMutableDictionary *object = _objects[indexPath.row];
+        
+        cell.nameLabel.text = [object valueForKey:@"page_title"];
+        
+        NSData *imageData= [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[object valueForKey:@"img75"]]];
+        cell.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFit;
+        cell.thumbnailImageView.image=[UIImage imageWithData:imageData];
+        
     }
     
-    NSMutableDictionary *object = _objects[indexPath.row];
-    
-    cell.nameLabel.text = [object valueForKey:@"page_title"];
-    
-    NSData *imageData= [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[object valueForKey:@"img75"]]];
-    cell.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFit;
-    cell.thumbnailImageView.image=[UIImage imageWithData:imageData];
     
     // example image from the library
     //cell.thumbnailImageView.image = [UIImage imageNamed:@"contact-me.jpg"];

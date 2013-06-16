@@ -485,11 +485,13 @@
 		46567832176705D500CD8D3B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: paul casey (44BX48UNZU)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GardenAppMaster/GardenAppMaster-Prefix.pch";
 				INFOPLIST_FILE = "GardenAppMaster/GardenAppMaster-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9CC122C8-B02D-4D25-AC7A-299E32526840";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -497,11 +499,13 @@
 		46567833176705D500CD8D3B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: paul casey (44BX48UNZU)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GardenAppMaster/GardenAppMaster-Prefix.pch";
 				INFOPLIST_FILE = "GardenAppMaster/GardenAppMaster-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9CC122C8-B02D-4D25-AC7A-299E32526840";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
