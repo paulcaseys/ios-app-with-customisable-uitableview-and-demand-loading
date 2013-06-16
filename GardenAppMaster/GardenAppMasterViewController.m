@@ -7,8 +7,8 @@
 //
 
 #import "GardenAppMasterViewController.h"
-
 #import "GardenAppDetailViewController.h"
+#import "SimpleTableCell.h"
 
 BOOL animationRunning;
 
@@ -87,18 +87,28 @@ BOOL animationRunning;
                           error:&err];
     
     for (NSDictionary *item in json){
+        // create an obj to insert into the table
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+        
+        NSString *page_title = [item valueForKey:@"page_title"];
+        [dictionary setValue:page_title forKey:@"page_title"];
+        
         NSString *unique_reference_id = [item valueForKey:@"unique_reference_id"];
+        [dictionary setValue:unique_reference_id forKey:@"unique_reference_id"];
         
         // You can also get nested images like this
         NSArray *uploaded_images = [item valueForKey:@"uploaded_images"];
+        NSString *img75 = @"";
         for (NSDictionary *uploaded_image in uploaded_images){            
-            NSString *img75 = [uploaded_image valueForKey:@"uploaded_image_path_75"];            
+            img75 = [uploaded_image valueForKey:@"uploaded_image_path_75"];
             NSLog(@"img75: %@",img75);
         }
-        [self insertNewItemFromFeed:unique_reference_id];
+        
+        [dictionary setValue:img75 forKey:@"img75"];
+        
+        [self insertNewItemFromFeed:dictionary];
     }
 	texter.text = @"...";
-
 }
 
 // example to parse instagram
@@ -123,22 +133,21 @@ BOOL animationRunning;
         // You can also get nested properties like this
         NSString *imgLow = [item valueForKeyPath:@"images.low_resolution.url"];
         NSLog(@"imgLow - %@",imgLow);
-        [self insertNewItemFromFeed:imgLow];
+        //[self insertNewItemFromFeed:imgLow];
 
     }
     
 	texter.text = @"...";
 }
 
-- (void)insertNewItemFromFeed:(NSString *)string
+- (void)insertNewItemFromFeed:(NSMutableDictionary *)obj
 {
-    if (string == nil) string = @"Default Value";
+    //if (string == nil) string = @"Default Value";
     
     if (!_objects) {
         _objects = [[NSMutableArray alloc] init];
     }
-    NSString *str = string;
-    [_objects insertObject:str atIndex:0];
+    [_objects insertObject:obj atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -178,17 +187,27 @@ BOOL animationRunning;
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    //static NSString *CellIdentifier = @"Cell";
+    static NSString *simpleTableIdentifier = @"SimpleTableItem";
+    SimpleTableCell *cell = (SimpleTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+        
     }
     
+    NSMutableDictionary *object = _objects[indexPath.row];
     
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    cell.nameLabel.text = [object valueForKey:@"page_title"];
+    
+    NSData *imageData= [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[object valueForKey:@"img75"]]];
+    cell.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.thumbnailImageView.image=[UIImage imageWithData:imageData];
+    
+    // example image from the library
+    //cell.thumbnailImageView.image = [UIImage imageNamed:@"contact-me.jpg"];
+    
     return cell;
 }
 
@@ -232,6 +251,11 @@ BOOL animationRunning;
     NSDate *object = _objects[indexPath.row];
     self.detailViewController.detailItem = object;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80;
 }
 
 @end

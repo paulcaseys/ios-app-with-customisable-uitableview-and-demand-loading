@@ -35,6 +35,9 @@
 		46567854176708D400CD8D3B /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 46567848176708D400CD8D3B /* SBJsonStreamWriterAccumulator.m */; };
 		46567855176708D400CD8D3B /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 4656784A176708D400CD8D3B /* SBJsonStreamWriterState.m */; };
 		46567856176708D400CD8D3B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4656784C176708D400CD8D3B /* SBJsonWriter.m */; };
+		46977FE9176D9A22002B9B5A /* contact-me.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 46977FE8176D9A22002B9B5A /* contact-me.jpg */; };
+		46977FEB176D9B6E002B9B5A /* SimpleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46977FEA176D9B6E002B9B5A /* SimpleTableCell.xib */; };
+		46977FEE176D9D24002B9B5A /* SimpleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46977FED176D9D24002B9B5A /* SimpleTableCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +97,10 @@
 		4656784A176708D400CD8D3B /* SBJsonStreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterState.m; sourceTree = "<group>"; };
 		4656784B176708D400CD8D3B /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		4656784C176708D400CD8D3B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		46977FE8176D9A22002B9B5A /* contact-me.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "contact-me.jpg"; path = "resources/images/contact-me.jpg"; sourceTree = "<group>"; };
+		46977FEA176D9B6E002B9B5A /* SimpleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleTableCell.xib; sourceTree = "<group>"; };
+		46977FEC176D9D24002B9B5A /* SimpleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableCell.h; sourceTree = "<group>"; };
+		46977FED176D9D24002B9B5A /* SimpleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,11 +165,15 @@
 				46567806176705D500CD8D3B /* GardenAppAppDelegate.m */,
 				4656780E176705D500CD8D3B /* GardenAppMasterViewController.h */,
 				4656780F176705D500CD8D3B /* GardenAppMasterViewController.m */,
+				46977FE8176D9A22002B9B5A /* contact-me.jpg */,
 				46567811176705D500CD8D3B /* GardenAppDetailViewController.h */,
 				46567812176705D500CD8D3B /* GardenAppDetailViewController.m */,
 				46567814176705D500CD8D3B /* GardenAppMasterViewController.xib */,
 				46567817176705D500CD8D3B /* GardenAppDetailViewController.xib */,
 				465677FD176705D500CD8D3B /* Supporting Files */,
+				46977FEA176D9B6E002B9B5A /* SimpleTableCell.xib */,
+				46977FEC176D9D24002B9B5A /* SimpleTableCell.h */,
+				46977FED176D9D24002B9B5A /* SimpleTableCell.m */,
 			);
 			path = GardenAppMaster;
 			sourceTree = "<group>";
@@ -307,6 +318,8 @@
 				4656780D176705D500CD8D3B /* Default-568h@2x.png in Resources */,
 				46567816176705D500CD8D3B /* GardenAppMasterViewController.xib in Resources */,
 				46567819176705D500CD8D3B /* GardenAppDetailViewController.xib in Resources */,
+				46977FE9176D9A22002B9B5A /* contact-me.jpg in Resources */,
+				46977FEB176D9B6E002B9B5A /* SimpleTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +368,7 @@
 				46567854176708D400CD8D3B /* SBJsonStreamWriterAccumulator.m in Sources */,
 				46567855176708D400CD8D3B /* SBJsonStreamWriterState.m in Sources */,
 				46567856176708D400CD8D3B /* SBJsonWriter.m in Sources */,
+				46977FEE176D9D24002B9B5A /* SimpleTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
