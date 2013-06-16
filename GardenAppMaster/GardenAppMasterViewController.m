@@ -190,6 +190,27 @@ BOOL animationRunning;
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        NSMutableDictionary *object = _objects[indexPath.row];
+        cell.textLabel.text = [object valueForKey:@"page_title"];
+        
+        NSData *imageData= [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[object valueForKey:@"img75"]]];
+        cell.contentMode = UIViewContentModeScaleAspectFit;
+        cell.image=[UIImage imageWithData:imageData];
+        //cell.image = [UIImage imageNamed:@"contact-me.jpg"];
+    }
+    
+    
+    
+    
+    /*
+     // RUNS SLOW
     //static NSString *CellIdentifier = @"Cell";
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
     SimpleTableCell *cell = (SimpleTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -204,13 +225,15 @@ BOOL animationRunning;
         
         NSData *imageData= [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[object valueForKey:@"img75"]]];
         cell.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFit;
-        cell.thumbnailImageView.image=[UIImage imageWithData:imageData];
+        //cell.thumbnailImageView.image=[UIImage imageWithData:imageData];
+        cell.thumbnailImageView.image = [UIImage imageNamed:@"contact-me.jpg"];
         
     }
     
     
     // example image from the library
     //cell.thumbnailImageView.image = [UIImage imageNamed:@"contact-me.jpg"];
+     */
     
     return cell;
 }
