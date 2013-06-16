@@ -39,7 +39,7 @@ BOOL animationRunning;
     self.navigationItem.rightBarButtonItem = addButton;
     
     // initialise load
-    [self initialiseFeedLoad];
+    [self initialiseCosmosFeedLoad];
     
     // initialise animation
     animationRunning = YES;
@@ -72,10 +72,40 @@ BOOL animationRunning;
 
 #pragma mark Actions
 
-- (void)initialiseFeedLoad {
+// example to parse cosmos
+- (void)initialiseCosmosFeedLoad {
 	
+    // need to parse the url because pipes in the url cause errors
+    NSString *unDecodedURL =[NSString stringWithFormat:@"http://cosmos.is/api/service/data/format/json/?project_name=SummerAtTarget&project_password=6CB4816A23A965B5DFD58E45F4C23&table=unique_references&batch=1&batchSize=6&whereConditionArray=project_id||9&select=*&orderBy=vote_count||desc"];
+    NSURL *decodedUrl = [NSURL URLWithString:[unDecodedURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+    NSData *url = [NSData dataWithContentsOfURL:decodedUrl];
     
-	NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://api.instagram.com/v1/users/688542/media/recent?count=%22+me.imageCount+%22&access_token=688542.1fb234f.b393aba051d54bb9a03714ca63594171&callback=?"]];
+    NSError *err;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:url
+                          options:kNilOptions
+                          error:&err];
+    
+    for (NSDictionary *item in json){
+        NSString *unique_reference_id = [item valueForKey:@"unique_reference_id"];
+        
+        // You can also get nested images like this
+        NSArray *uploaded_images = [item valueForKey:@"uploaded_images"];
+        for (NSDictionary *uploaded_image in uploaded_images){            
+            NSString *img75 = [uploaded_image valueForKey:@"uploaded_image_path_75"];            
+            NSLog(@"img75: %@",img75);
+        }
+        [self insertNewItemFromFeed:unique_reference_id];
+    }
+	texter.text = @"...";
+
+}
+
+// example to parse instagram
+- (void)initialiseInstagramFeedLoad {    
+    
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://api.instagram.com/v1/users/688542/media/recent?count=%22+me.imageCount+%22&access_token=688542.1fb234f.b393aba051d54bb9a03714ca63594171&callback=?"]];
+
     NSError *err;
     NSDictionary* json = [NSJSONSerialization
                           JSONObjectWithData:data
