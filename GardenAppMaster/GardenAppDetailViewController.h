@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GardenAppDetailViewController : UIViewController
-
+@interface GardenAppDetailViewController  : UIViewController {
+    NSMutableDictionary *_object;    
+}
+@property (strong, nonatomic) NSMutableDictionary *_object;
 @property (strong, nonatomic) id detailItem;
 
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;

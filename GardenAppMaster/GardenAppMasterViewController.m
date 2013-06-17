@@ -44,7 +44,7 @@ int section;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"the master title";
+        self.title = NSLocalizedString(@"Master title", @"Master title");;
     }
     return self;
 }
@@ -257,8 +257,14 @@ int section;
     NSArray *array = [dictionary objectForKey:@"data"];
     NSMutableDictionary *object = array[indexPath.row];
     
+    // custom back button text
+    NSString *backButtonText = @"back";
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: backButtonText style: UIBarButtonItemStyleBordered target: nil action: nil];
+    [[self navigationItem] setBackBarButtonItem: newBackButton];
+    
     //self.detailViewController.detailItem.description = @"hi";
     self.detailViewController.detailItem = object;
+    self.detailViewController._object = object;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
     [theTableView deselectRowAtIndexPath:[theTableView indexPathForSelectedRow] animated:YES];
 }
