@@ -17,6 +17,24 @@ int section;
 
 @interface GardenAppMasterViewController () {
     NSMutableArray *_objects;
+    NSMutableArray *_dataArray;
+    
+    NSMutableArray *_temporaryItemsArray;
+    
+    NSString *_firstItemsSectionHeading;
+    NSMutableArray *_firstItemsArray;
+    
+    NSString *_secondItemsSectionHeading;
+    NSMutableArray *_secondItemsArray;
+    
+    NSString *_thirdItemsSectionHeading;
+    NSMutableArray *_thirdItemsArray;
+    
+    NSString *_fourthItemsSectionHeading;
+    NSMutableArray *_fourthItemsArray;
+    
+    NSString *_fifthItemsSectionHeading;
+    NSMutableArray *_fifthItemsArray;
 }
 @end
 
@@ -49,12 +67,28 @@ int section;
 	tableView.rowHeight = 100;
 	tableView.backgroundColor = [UIColor clearColor];
     
+            
+    //Initialize the dataArray
+    _dataArray = [[NSMutableArray alloc] init];
+    _firstItemsArray = [[NSMutableArray alloc] init];
+    _secondItemsArray = [[NSMutableArray alloc] init];
+    _thirdItemsArray = [[NSMutableArray alloc] init];
+    _fourthItemsArray = [[NSMutableArray alloc] init];
+    _fifthItemsArray = [[NSMutableArray alloc] init];
+    
+    // define the section headings
+    _firstItemsSectionHeading = @"this is the first section heading";
+    _secondItemsSectionHeading = @"this is the second section heading";
+    _thirdItemsSectionHeading = @"this is the third section heading";
+    _fourthItemsSectionHeading = @"this is the fourth section heading";
+    _fifthItemsSectionHeading = @"this is the fifth section heading";
+    
     // initialise load
     [self initialiseCosmosFeedLoad];
     
     // initialise animation
-    //animationRunning = YES;
-    //[self fadeOut:nil finished:nil context:nil];
+    animationRunning = YES;
+    [self fadeOut:nil finished:nil context:nil];
     
 }
 
@@ -92,90 +126,68 @@ int section;
     NSData *url = [NSData dataWithContentsOfURL:decodedUrl];
     
     NSError *err;
-    NSDictionary* json = [NSJSONSerialization
+    NSDictionary* json1 = [NSJSONSerialization
                           JSONObjectWithData:url
                           options:kNilOptions
                           error:&err];
     
-    section = 0;
-    for (NSMutableDictionary *item in json){
-        [self addItem:item];
+    // FIRST GROUP OF ITEMS    
+    for (NSMutableDictionary *itemFromGroup1 in json1){
+        // you could set up a condition here to detect which category it is in, then define which array to place it in        
+        [self parseAndPushItemIntoArray:itemFromGroup1 theArray:_firstItemsArray];
     }
-    section = 1;
-    for (NSMutableDictionary *item2 in json){
-        [self addItem:item2];
+    // SECOND GROUP OF ITEMS
+    for (NSMutableDictionary *itemFromGroup2 in json1){
+        // you could set up a condition here to detect which category it is in, then define which array to place it in
+        [self parseAndPushItemIntoArray:itemFromGroup2 theArray:_secondItemsArray];
     }
-    section = 2;
-    for (NSMutableDictionary *item3 in json){
-        [self addItem:item3];
-    }
-	texter.text = @"...";
-}
-/*
-// example to parse instagram
-- (void)initialiseInstagramFeedLoad {    
+    // now put them into the _dataArray
+    [_dataArray addObject:[NSDictionary dictionaryWithObject:_firstItemsArray forKey:@"data"]];
+    [_dataArray addObject:[NSDictionary dictionaryWithObject:_secondItemsArray forKey:@"data"]];
     
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://api.instagram.com/v1/users/688542/media/recent?count=%22+me.imageCount+%22&access_token=688542.1fb234f.b393aba051d54bb9a03714ca63594171&callback=?"]];
-
-    NSError *err;
-    NSDictionary* json = [NSJSONSerialization
-                          JSONObjectWithData:data
-                          options:kNilOptions
-                          error:&err];
-    
-    NSMutableArray *array = json[@"data"];
-    
-    NSLog(@"%@", [array objectAtIndex:0]);
-    
-    for (NSDictionary *item in array){
-        NSString *created_time = [item valueForKey:@"created_time"];
-        NSLog(@"created_time - %@",created_time);
-        
-        // You can also get nested properties like this
-        NSString *imgLow = [item valueForKeyPath:@"images.low_resolution.url"];
-        NSLog(@"imgLow - %@",imgLow);
-        //[self insertNewItemFromFeed:imgLow];
-
-    }
     
 	texter.text = @"...";
 }
- */
-- (void)addItem:(NSMutableDictionary *)item
+
+
+
+- (void)parseAndPushItemIntoArray:(NSMutableDictionary *)theDictionary theArray:(NSMutableArray *)theArray
 {
+    
     // create an obj to insert into the table
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    NSMutableDictionary *obj = [NSMutableDictionary dictionary];
+    /*
+    NSString *sectionID = [dictionary valueForKey:@"sectionID"];
+    [obj setValue:sectionID forKey:@"sectionID"];
+     */
     
-    NSString *page_title = [item valueForKey:@"page_title"];
-    [dictionary setValue:page_title forKey:@"page_title"];
+    NSString *page_title = [theDictionary valueForKey:@"page_title"];
+    [obj setValue:page_title forKey:@"page_title"];
     
-    NSString *unique_reference_id = [item valueForKey:@"unique_reference_id"];
-    [dictionary setValue:unique_reference_id forKey:@"unique_reference_id"];
+    NSString *unique_reference_id = [theDictionary valueForKey:@"unique_reference_id"];
+    [obj setValue:unique_reference_id forKey:@"unique_reference_id"];
     
     // You can also get nested images like this
-    NSArray *uploaded_images = [item valueForKey:@"uploaded_images"];
+    NSArray *uploaded_images = [theDictionary valueForKey:@"uploaded_images"];
     NSString *img75 = @"";
     for (NSDictionary *uploaded_image in uploaded_images){
         img75 = [uploaded_image valueForKey:@"uploaded_image_path_75"];
     }
     
-    [dictionary setValue:img75 forKey:@"img75"];
-    [dictionary setValue:img75 forKey:@"img75"];
     
-    [self insertNewItemFromFeed:dictionary];
-
-}
-
-- (void)insertNewItemFromFeed:(NSMutableDictionary *)obj
-{
-    //if (string == nil) string = @"Default Value";
+    [obj setValue:img75 forKey:@"img75"];
     
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
+    // checks if the array exists    
+    if (!theArray) {
+        theArray = [[NSMutableArray alloc] init];
     }
-    [_objects insertObject:obj atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-    [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    // inserting to table array
+    
+    [theArray insertObject:obj atIndex:0];
+    
+    //NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    //[tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 
@@ -186,45 +198,35 @@ int section;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-/*
-- (void)insertNewObject:(id)sender
-{
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
-    }
-    NSString *str = @"whatevs";
-    [_objects insertObject:str atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
- */
 
 #pragma mark - Table View
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [_dataArray count];
 }
+
 - (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section
 {
-    if(section == 0)
-    {
-        return @"Title0";
-    }
-    else if(section == 1)
-    {
-        return @"Title1";
-    }
-    else
-    {
-        return @"Title2";
+    if(section == 0) {
+        return _firstItemsSectionHeading;
+    } else if(section == 1) {
+        return _secondItemsSectionHeading;
+    } else if(section == 2) {
+        return _thirdItemsSectionHeading;
+    } else if(section == 3) {
+        return _fourthItemsSectionHeading;
+    } else {
+        return _fifthItemsSectionHeading;
     }
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _objects.count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Number of rows it should expect should be based on the section
+    NSDictionary *dictionary = [_dataArray objectAtIndex:section];
+    NSArray *array = [dictionary objectForKey:@"data"];
+    return [array count];
+    //return _objects.count;
 }
 
 
@@ -233,8 +235,6 @@ int section;
 {
     
     
-    NSLog(@"The value of integer num is %i", [indexPath section]);
-    
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
     SimpleTableCell *cell = (SimpleTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
@@ -242,8 +242,11 @@ int section;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SimpleTableCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
         
-        NSMutableDictionary *object = _objects[indexPath.row];
-                
+        // traverses arrays to find the object
+        NSMutableDictionary *dictionary = [_dataArray objectAtIndex:indexPath.section];
+        NSArray *array = [dictionary objectForKey:@"data"];
+        NSMutableDictionary *object = array[indexPath.row];        
+        
         cell.nameLabel.text = [object valueForKey:@"page_title"];
         
         NSURL *imageURL = [NSURL URLWithString:[object valueForKey:@"img75"]];
@@ -264,6 +267,7 @@ int section;
                 });
             });
         }
+         /**/
         
     }
     
@@ -320,14 +324,19 @@ int section;
  }
  */
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (!self.detailViewController) {
         self.detailViewController = [[GardenAppDetailViewController alloc] initWithNibName:@"GardenAppDetailViewController" bundle:nil];
     }
-    NSDate *object = _objects[indexPath.row];
+    // traverses arrays to find the object
+    NSMutableDictionary *dictionary = [_dataArray objectAtIndex:indexPath.section];
+    NSArray *array = [dictionary objectForKey:@"data"];
+    NSMutableDictionary *object = array[indexPath.row];
+    
     self.detailViewController.detailItem = object;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
+    [theTableView deselectRowAtIndexPath:[theTableView indexPathForSelectedRow] animated:YES];
 }
 
 
