@@ -12,13 +12,16 @@
 @class GardenAppDetailViewController;
 
 
-@interface GardenAppMasterViewController : UITableViewController {
-    
-    IBOutlet UITextView *texter;
+@interface GardenAppMasterViewController : UIViewController {
     
     NSURLConnection *theConnection;
+    
+    IBOutlet UITextView *texter;
+	IBOutlet UITableView *tableView;
+	IBOutlet UIImageView *imageView;
 }
 
 @property (strong, nonatomic) GardenAppDetailViewController *detailViewController;
+
 
 @end

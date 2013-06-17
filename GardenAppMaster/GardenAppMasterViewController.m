@@ -10,6 +10,7 @@
 #import "GardenAppDetailViewController.h"
 #import "SimpleTableCell.h"
 
+
 BOOL animationRunning;
 
 
@@ -37,6 +38,15 @@ BOOL animationRunning;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    
+	//
+	// Change the properties of the imageView and tableView (these could be set
+	// in interface builder instead).
+	//
+	tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	tableView.rowHeight = 100;
+	tableView.backgroundColor = [UIColor clearColor];
     
     // initialise load
     [self initialiseCosmosFeedLoad];
@@ -86,34 +96,18 @@ BOOL animationRunning;
                           options:kNilOptions
                           error:&err];
     
-    for (NSDictionary *item in json){
-        // create an obj to insert into the table
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-        
-        NSString *page_title = [item valueForKey:@"page_title"];
-        [dictionary setValue:page_title forKey:@"page_title"];
-        
-        NSString *unique_reference_id = [item valueForKey:@"unique_reference_id"];
-        [dictionary setValue:unique_reference_id forKey:@"unique_reference_id"];
-        
-        // You can also get nested images like this
-        NSArray *uploaded_images = [item valueForKey:@"uploaded_images"];
-        NSString *img75 = @"";
-        for (NSDictionary *uploaded_image in uploaded_images){            
-            img75 = [uploaded_image valueForKey:@"uploaded_image_path_75"];
-            //NSLog(@"img75: %@",img75);
-        }
-        
-        [dictionary setValue:img75 forKey:@"img75"];
-        
-        [self insertNewItemFromFeed:dictionary];
-        [self insertNewItemFromFeed:dictionary];
-        [self insertNewItemFromFeed:dictionary];
-        [self insertNewItemFromFeed:dictionary];
+    for (NSMutableDictionary *item in json){
+        [self addItem:item];
+    }
+    for (NSMutableDictionary *item2 in json){
+        [self addItem:item2];
+    }
+    for (NSMutableDictionary *item3 in json){
+        [self addItem:item3];
     }
 	texter.text = @"...";
 }
-
+/*
 // example to parse instagram
 - (void)initialiseInstagramFeedLoad {    
     
@@ -142,6 +136,31 @@ BOOL animationRunning;
     
 	texter.text = @"...";
 }
+ */
+- (void)addItem:(NSMutableDictionary *)item
+{
+    // create an obj to insert into the table
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    
+    NSString *page_title = [item valueForKey:@"page_title"];
+    [dictionary setValue:page_title forKey:@"page_title"];
+    
+    NSString *unique_reference_id = [item valueForKey:@"unique_reference_id"];
+    [dictionary setValue:unique_reference_id forKey:@"unique_reference_id"];
+    
+    // You can also get nested images like this
+    NSArray *uploaded_images = [item valueForKey:@"uploaded_images"];
+    NSString *img75 = @"";
+    for (NSDictionary *uploaded_image in uploaded_images){
+        img75 = [uploaded_image valueForKey:@"uploaded_image_path_75"];
+        //NSLog(@"img75: %@",img75);
+    }
+    
+    [dictionary setValue:img75 forKey:@"img75"];
+    
+    [self insertNewItemFromFeed:dictionary];
+
+}
 
 - (void)insertNewItemFromFeed:(NSMutableDictionary *)obj
 {
@@ -152,7 +171,7 @@ BOOL animationRunning;
     }
     [_objects insertObject:obj atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 
@@ -172,7 +191,7 @@ BOOL animationRunning;
     NSString *str = @"whatevs";
     [_objects insertObject:str atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Table View
@@ -188,30 +207,10 @@ BOOL animationRunning;
 }
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
-        NSMutableDictionary *object = _objects[indexPath.row];
-        cell.textLabel.text = [object valueForKey:@"page_title"];
-        
-        NSData *imageData= [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[object valueForKey:@"img75"]]];
-        cell.contentMode = UIViewContentModeScaleAspectFit;
-        cell.image=[UIImage imageWithData:imageData];
-        //cell.image = [UIImage imageNamed:@"contact-me.jpg"];
-    }
     
     
-    
-    
-    /*
-     // RUNS SLOW
-    //static NSString *CellIdentifier = @"Cell";
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
     SimpleTableCell *cell = (SimpleTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
@@ -223,18 +222,36 @@ BOOL animationRunning;
         
         cell.nameLabel.text = [object valueForKey:@"page_title"];
         
-        NSData *imageData= [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[object valueForKey:@"img75"]]];
-        cell.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFit;
-        //cell.thumbnailImageView.image=[UIImage imageWithData:imageData];
         cell.thumbnailImageView.image = [UIImage imageNamed:@"contact-me.jpg"];
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+        dispatch_async(queue, ^{
+            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[object valueForKey:@"img75"]]];
+            UIImage *image = [UIImage imageWithData:data];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.thumbnailImageView.image = image;
+            });
+        });        
         
     }
     
-    
-    // example image from the library
-    //cell.thumbnailImageView.image = [UIImage imageNamed:@"contact-me.jpg"];
+    /*
+     // BASIC table cell
+     static NSString *CellIdentifier = @"Cell";
+     
+     UITableViewCell *cell = [theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+     if (cell == nil) {
+     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+     
+     NSMutableDictionary *object = _objects[indexPath.row];
+     cell.textLabel.text = [object valueForKey:@"page_title"];
+     
+     NSData *imageData= [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[object valueForKey:@"img75"]]];
+     cell.contentMode = UIViewContentModeScaleAspectFit;
+     cell.imageView.image=[UIImage imageWithData:imageData];
+     //cell.image = [UIImage imageNamed:@"contact-me.jpg"];
+     }
      */
-    
     return cell;
 }
 
@@ -282,7 +299,7 @@ BOOL animationRunning;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    return 100;
 }
 
 @end
