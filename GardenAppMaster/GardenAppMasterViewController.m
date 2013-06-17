@@ -252,6 +252,7 @@ int section;
     NSArray *array = [dictionary objectForKey:@"data"];
     NSMutableDictionary *object = array[indexPath.row];
     
+    //self.detailViewController.detailItem.description = @"hi";
     self.detailViewController.detailItem = object;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
     [theTableView deselectRowAtIndexPath:[theTableView indexPathForSelectedRow] animated:YES];
