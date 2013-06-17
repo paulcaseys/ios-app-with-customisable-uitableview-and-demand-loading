@@ -16,60 +16,59 @@ int section;
 
 
 @interface GardenAppMasterViewController () {
-    NSMutableArray *_objects;
+    
+    // define the dataArray
     NSMutableArray *_dataArray;
-    
-    NSMutableArray *_temporaryItemsArray;
-    
-    NSString *_firstItemsSectionHeading;
+        
+    // initialize the section arrays
     NSMutableArray *_firstItemsArray;
-    
-    NSString *_secondItemsSectionHeading;
     NSMutableArray *_secondItemsArray;
-    
-    NSString *_thirdItemsSectionHeading;
     NSMutableArray *_thirdItemsArray;
-    
-    NSString *_fourthItemsSectionHeading;
     NSMutableArray *_fourthItemsArray;
-    
-    NSString *_fifthItemsSectionHeading;
     NSMutableArray *_fifthItemsArray;
+    
+    // initialize the section headings
+    NSString *_firstItemsSectionHeading;    
+    NSString *_secondItemsSectionHeading;    
+    NSString *_thirdItemsSectionHeading;    
+    NSString *_fourthItemsSectionHeading;    
+    NSString *_fifthItemsSectionHeading;
+    
 }
+
 @end
 
 @implementation GardenAppMasterViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+// adds the title to the header 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Master", @"Master");
+        self.title = @"the master title";
     }
     return self;
 }
-							
-- (void)viewDidLoad
-{
+
+// view is ready
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
     
-	//
-	// Change the properties of the imageView and tableView (these could be set
-	// in interface builder instead).
-	//
+	// table style
 	tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	tableView.rowHeight = 100;
 	tableView.backgroundColor = [UIColor clearColor];
-    
-            
-    //Initialize the dataArray
+                
+    // initialize the dataArray
     _dataArray = [[NSMutableArray alloc] init];
+    
+    // initialize the section arrays
     _firstItemsArray = [[NSMutableArray alloc] init];
     _secondItemsArray = [[NSMutableArray alloc] init];
     _thirdItemsArray = [[NSMutableArray alloc] init];
@@ -93,27 +92,6 @@ int section;
 }
 
 
-- (void) fadeOut:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:2];
-    [UIView  setAnimationDelegate:self];
-    if(animationRunning){
-        [UIView setAnimationDidStopSelector:@selector(fadeIn:finished:context:) ];
-    }
-    [texter setAlpha:0.00];
-    [UIView commitAnimations];
-}
-
-- (void) fadeIn:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:2];
-    [UIView  setAnimationDelegate:self];
-    if(animationRunning){
-        [UIView setAnimationDidStopSelector:@selector(fadeOut:finished:context:) ];
-    }
-    [texter setAlpha:1.00];
-    [UIView commitAnimations];
-}
 
 #pragma mark Actions
 
@@ -134,12 +112,12 @@ int section;
     // FIRST GROUP OF ITEMS    
     for (NSMutableDictionary *itemFromGroup1 in json1){
         // you could set up a condition here to detect which category it is in, then define which array to place it in        
-        [self parseAndPushItemIntoArray:itemFromGroup1 theArray:_firstItemsArray];
+        [self parseAndPushCosmosItemIntoArray:itemFromGroup1 theArray:_firstItemsArray];
     }
-    // SECOND GROUP OF ITEMS
+    // SECOND GROUP OF ITEMS (this could be from a different feed)
     for (NSMutableDictionary *itemFromGroup2 in json1){
         // you could set up a condition here to detect which category it is in, then define which array to place it in
-        [self parseAndPushItemIntoArray:itemFromGroup2 theArray:_secondItemsArray];
+        [self parseAndPushCosmosItemIntoArray:itemFromGroup2 theArray:_secondItemsArray];
     }
     // now put them into the _dataArray
     [_dataArray addObject:[NSDictionary dictionaryWithObject:_firstItemsArray forKey:@"data"]];
@@ -151,30 +129,26 @@ int section;
 
 
 
-- (void)parseAndPushItemIntoArray:(NSMutableDictionary *)theDictionary theArray:(NSMutableArray *)theArray
-{
+// this is where you can parse out certain objects and
+- (void)parseAndPushCosmosItemIntoArray:(NSMutableDictionary *)theDictionary theArray:(NSMutableArray *)theArray {
     
     // create an obj to insert into the table
     NSMutableDictionary *obj = [NSMutableDictionary dictionary];
-    /*
-    NSString *sectionID = [dictionary valueForKey:@"sectionID"];
-    [obj setValue:sectionID forKey:@"sectionID"];
-     */
     
+    // parses object
     NSString *page_title = [theDictionary valueForKey:@"page_title"];
     [obj setValue:page_title forKey:@"page_title"];
     
+    // parses object
     NSString *unique_reference_id = [theDictionary valueForKey:@"unique_reference_id"];
     [obj setValue:unique_reference_id forKey:@"unique_reference_id"];
     
-    // You can also get nested images like this
+    // parses nested object
     NSArray *uploaded_images = [theDictionary valueForKey:@"uploaded_images"];
     NSString *img75 = @"";
     for (NSDictionary *uploaded_image in uploaded_images){
         img75 = [uploaded_image valueForKey:@"uploaded_image_path_75"];
     }
-    
-    
     [obj setValue:img75 forKey:@"img75"];
     
     // checks if the array exists    
@@ -182,15 +156,10 @@ int section;
         theArray = [[NSMutableArray alloc] init];
     }
     
-    // inserting to table array
-    
+    // inserting to table array    
     [theArray insertObject:obj atIndex:0];
     
-    //NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    //[tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
-
-
 
 
 - (void)didReceiveMemoryWarning
@@ -201,12 +170,13 @@ int section;
 
 #pragma mark - Table View
 
+// defines the number of sections in table
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [_dataArray count];
 }
 
-- (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section
-{
+// defines the title of each section (array)
+- (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0) {
         return _firstItemsSectionHeading;
     } else if(section == 1) {
@@ -220,7 +190,7 @@ int section;
     }
 }
 
-
+// defines how many rows in each section
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Number of rows it should expect should be based on the section
     NSDictionary *dictionary = [_dataArray objectAtIndex:section];
@@ -231,8 +201,7 @@ int section;
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
@@ -267,65 +236,14 @@ int section;
                 });
             });
         }
-         /**/
         
     }
-    
-    /*
-     // BASIC table cell
-     static NSString *CellIdentifier = @"Cell";
-     
-     UITableViewCell *cell = [theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
-     if (cell == nil) {
-     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-     
-     NSMutableDictionary *object = _objects[indexPath.row];
-     cell.textLabel.text = [object valueForKey:@"page_title"];
-     
-     NSData *imageData= [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[object valueForKey:@"img75"]]];
-     cell.contentMode = UIViewContentModeScaleAspectFit;
-     cell.imageView.image=[UIImage imageWithData:imageData];
-     //cell.image = [UIImage imageNamed:@"contact-me.jpg"];
-     }
-     */
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
 
-- (void)tableView:(UITableView *)theTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
-        [theTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
-}
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+/// TAPS TO SECONDARY LEVEL
+- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!self.detailViewController) {
         self.detailViewController = [[GardenAppDetailViewController alloc] initWithNibName:@"GardenAppDetailViewController" bundle:nil];
     }
@@ -337,6 +255,30 @@ int section;
     self.detailViewController.detailItem = object;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
     [theTableView deselectRowAtIndexPath:[theTableView indexPathForSelectedRow] animated:YES];
+}
+
+// EXAMPLE ANIMATION
+
+- (void) fadeOut:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:2];
+    [UIView  setAnimationDelegate:self];
+    if(animationRunning){
+        [UIView setAnimationDidStopSelector:@selector(fadeIn:finished:context:) ];
+    }
+    [texter setAlpha:0.00];
+    [UIView commitAnimations];
+}
+
+- (void) fadeIn:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:2];
+    [UIView  setAnimationDelegate:self];
+    if(animationRunning){
+        [UIView setAnimationDidStopSelector:@selector(fadeOut:finished:context:) ];
+    }
+    [texter setAlpha:1.00];
+    [UIView commitAnimations];
 }
 
 
