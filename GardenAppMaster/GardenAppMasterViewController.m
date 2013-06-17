@@ -218,6 +218,11 @@ int section;
         
         cell.nameLabel.text = [object valueForKey:@"page_title"];
         
+        
+        // image scales to correct aspect ratio
+        cell.thumbnailImageView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        // image loading with async and cache
         NSURL *imageURL = [NSURL URLWithString:[object valueForKey:@"img75"]];
         NSString *key = [[object valueForKey:@"img75"] MD5Hash];
         NSData *data = [FTWCache objectForKey:key];
@@ -225,7 +230,7 @@ int section;
             UIImage *image = [UIImage imageWithData:data];
             cell.thumbnailImageView.image = image;
         } else {
-            imageView.image = [UIImage imageNamed:@"img_def"];
+            cell.thumbnailImageView.image = [UIImage imageNamed:@"loading-thumb.png"];
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
             dispatch_async(queue, ^{
                 NSData *data = [NSData dataWithContentsOfURL:imageURL];
