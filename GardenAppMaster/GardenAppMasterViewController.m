@@ -12,6 +12,7 @@
 
 
 BOOL animationRunning;
+int section;
 
 
 @interface GardenAppMasterViewController () {
@@ -96,12 +97,15 @@ BOOL animationRunning;
                           options:kNilOptions
                           error:&err];
     
+    section = 0;
     for (NSMutableDictionary *item in json){
         [self addItem:item];
     }
+    section = 1;
     for (NSMutableDictionary *item2 in json){
         [self addItem:item2];
     }
+    section = 2;
     for (NSMutableDictionary *item3 in json){
         [self addItem:item3];
     }
@@ -153,9 +157,9 @@ BOOL animationRunning;
     NSString *img75 = @"";
     for (NSDictionary *uploaded_image in uploaded_images){
         img75 = [uploaded_image valueForKey:@"uploaded_image_path_75"];
-        //NSLog(@"img75: %@",img75);
     }
     
+    [dictionary setValue:img75 forKey:@"img75"];
     [dictionary setValue:img75 forKey:@"img75"];
     
     [self insertNewItemFromFeed:dictionary];
@@ -170,7 +174,7 @@ BOOL animationRunning;
         _objects = [[NSMutableArray alloc] init];
     }
     [_objects insertObject:obj atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
     [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
@@ -182,7 +186,7 @@ BOOL animationRunning;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/*
 - (void)insertNewObject:(id)sender
 {
     if (!_objects) {
@@ -193,6 +197,7 @@ BOOL animationRunning;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+ */
 
 #pragma mark - Table View
 
@@ -200,16 +205,35 @@ BOOL animationRunning;
 {
     return 1;
 }
+- (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section
+{
+    if(section == 0)
+    {
+        return @"Title0";
+    }
+    else if(section == 1)
+    {
+        return @"Title1";
+    }
+    else
+    {
+        return @"Title2";
+    }
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return _objects.count;
 }
 
+
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    
+    NSLog(@"The value of integer num is %i", [indexPath section]);
     
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
     SimpleTableCell *cell = (SimpleTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -219,18 +243,27 @@ BOOL animationRunning;
         cell = [nib objectAtIndex:0];
         
         NSMutableDictionary *object = _objects[indexPath.row];
-        
+                
         cell.nameLabel.text = [object valueForKey:@"page_title"];
         
-        cell.thumbnailImageView.image = [UIImage imageNamed:@"contact-me.jpg"];
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-        dispatch_async(queue, ^{
-            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[object valueForKey:@"img75"]]];
+        NSURL *imageURL = [NSURL URLWithString:[object valueForKey:@"img75"]];
+        NSString *key = [[object valueForKey:@"img75"] MD5Hash];
+        NSData *data = [FTWCache objectForKey:key];
+        if (data) {
             UIImage *image = [UIImage imageWithData:data];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                cell.thumbnailImageView.image = image;
+            cell.thumbnailImageView.image = image;
+        } else {
+            imageView.image = [UIImage imageNamed:@"img_def"];
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+            dispatch_async(queue, ^{
+                NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                [FTWCache setObject:data forKey:key];
+                UIImage *image = [UIImage imageWithData:data];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    cell.thumbnailImageView.image = image;
+                });
             });
-        });        
+        }
         
     }
     
@@ -261,11 +294,11 @@ BOOL animationRunning;
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)theTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [_objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [theTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
@@ -297,9 +330,5 @@ BOOL animationRunning;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 100;
-}
 
 @end

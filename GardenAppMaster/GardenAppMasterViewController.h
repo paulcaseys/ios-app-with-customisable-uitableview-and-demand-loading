@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "FTWCache.h"
+#import "NSString+MD5.h"
 
 @class GardenAppDetailViewController;
 
