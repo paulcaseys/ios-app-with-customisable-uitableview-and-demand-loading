@@ -1,23 +1,23 @@
 //
-//  GardenAppAppDelegate.m
-//  GardenAppMaster
+//  AppDelegate.m
+//  iOSApp
 //
-//  Created by PAUL CASEY on 2013-06-11.
+//  Created by PAUL CASEY on 2013-06-18.
 //  Copyright (c) 2013 PAUL CASEY. All rights reserved.
 //
 
-#import "GardenAppAppDelegate.h"
+#import "AppDelegate.h"
 
-#import "GardenAppMasterViewController.h"
+#import "MasterViewController.h"
 
-@implementation GardenAppAppDelegate
+@implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
-    GardenAppMasterViewController *masterViewController = [[GardenAppMasterViewController alloc] initWithNibName:@"GardenAppMasterViewController" bundle:nil];
+    MasterViewController *masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];

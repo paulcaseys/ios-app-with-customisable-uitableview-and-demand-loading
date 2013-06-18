@@ -1,18 +1,18 @@
 //
-//  GardenAppDetailViewController.m
-//  GardenAppMaster
+//  DetailViewController.m
+//  iOSApp
 //
-//  Created by PAUL CASEY on 2013-06-11.
+//  Created by PAUL CASEY on 2013-06-18.
 //  Copyright (c) 2013 PAUL CASEY. All rights reserved.
 //
 
-#import "GardenAppDetailViewController.h"
+#import "DetailViewController.h"
 
-@interface GardenAppDetailViewController ()
+@interface DetailViewController ()
 - (void)configureView;
 @end
 
-@implementation GardenAppDetailViewController
+@implementation DetailViewController
 @synthesize _object;
 
 #pragma mark - Managing the detail item
@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-        
+    
     
     [self configureView];
 }
@@ -61,5 +61,6 @@
     }
     return self;
 }
-							
+
 @end
+

@@ -1,13 +1,13 @@
 //
-//  GardenAppMasterViewController.m
-//  GardenAppMaster
+//  MasterViewController.m
+//  Master
 //
 //  Created by PAUL CASEY on 2013-06-11.
 //  Copyright (c) 2013 PAUL CASEY. All rights reserved.
 //
 
-#import "GardenAppMasterViewController.h"
-#import "GardenAppDetailViewController.h"
+#import "MasterViewController.h"
+#import "DetailViewController.h"
 #import "SimpleTableCell.h"
 
 
@@ -15,11 +15,11 @@ BOOL animationRunning;
 int section;
 
 
-@interface GardenAppMasterViewController () {
+@interface MasterViewController () {
     
     // define the dataArray
     NSMutableArray *_dataArray;
-        
+    
     // initialize the section arrays
     NSMutableArray *_firstItemsArray;
     NSMutableArray *_secondItemsArray;
@@ -28,19 +28,19 @@ int section;
     NSMutableArray *_fifthItemsArray;
     
     // initialize the section headings
-    NSString *_firstItemsSectionHeading;    
-    NSString *_secondItemsSectionHeading;    
-    NSString *_thirdItemsSectionHeading;    
-    NSString *_fourthItemsSectionHeading;    
+    NSString *_firstItemsSectionHeading;
+    NSString *_secondItemsSectionHeading;
+    NSString *_thirdItemsSectionHeading;
+    NSString *_fourthItemsSectionHeading;
     NSString *_fifthItemsSectionHeading;
     
 }
 
 @end
 
-@implementation GardenAppMasterViewController
+@implementation MasterViewController
 
-// adds the title to the header 
+// adds the title to the header
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -64,7 +64,7 @@ int section;
 	tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	tableView.rowHeight = 100;
 	tableView.backgroundColor = [UIColor clearColor];
-                
+    
     // initialize the dataArray
     _dataArray = [[NSMutableArray alloc] init];
     
@@ -105,13 +105,13 @@ int section;
     
     NSError *err;
     NSDictionary* json1 = [NSJSONSerialization
-                          JSONObjectWithData:url
-                          options:kNilOptions
-                          error:&err];
+                           JSONObjectWithData:url
+                           options:kNilOptions
+                           error:&err];
     
-    // FIRST GROUP OF ITEMS    
+    // FIRST GROUP OF ITEMS
     for (NSMutableDictionary *itemFromGroup1 in json1){
-        // you could set up a condition here to detect which category it is in, then define which array to place it in        
+        // you could set up a condition here to detect which category it is in, then define which array to place it in
         [self parseAndPushCosmosItemIntoArray:itemFromGroup1 theArray:_firstItemsArray];
     }
     // SECOND GROUP OF ITEMS (this could be from a different feed)
@@ -151,12 +151,12 @@ int section;
     }
     [obj setValue:img75 forKey:@"img75"];
     
-    // checks if the array exists    
+    // checks if the array exists
     if (!theArray) {
         theArray = [[NSMutableArray alloc] init];
     }
     
-    // inserting to table array    
+    // inserting to table array
     [theArray insertObject:obj atIndex:0];
     
 }
@@ -214,7 +214,7 @@ int section;
         // traverses arrays to find the object
         NSMutableDictionary *dictionary = [_dataArray objectAtIndex:indexPath.section];
         NSArray *array = [dictionary objectForKey:@"data"];
-        NSMutableDictionary *object = array[indexPath.row];        
+        NSMutableDictionary *object = array[indexPath.row];
         
         cell.nameLabel.text = [object valueForKey:@"page_title"];
         
@@ -250,7 +250,7 @@ int section;
 /// TAPS TO SECONDARY LEVEL
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!self.detailViewController) {
-        self.detailViewController = [[GardenAppDetailViewController alloc] initWithNibName:@"GardenAppDetailViewController" bundle:nil];
+        self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     }
     // traverses arrays to find the object
     NSMutableDictionary *dictionary = [_dataArray objectAtIndex:indexPath.section];

@@ -1,14 +1,14 @@
 //
-//  GardenAppMasterTests.m
-//  GardenAppMasterTests
+//  iOSAppTests.m
+//  iOSAppTests
 //
-//  Created by PAUL CASEY on 2013-06-11.
+//  Created by PAUL CASEY on 2013-06-18.
 //  Copyright (c) 2013 PAUL CASEY. All rights reserved.
 //
 
-#import "GardenAppMasterTests.h"
+#import "iOSAppTests.h"
 
-@implementation GardenAppMasterTests
+@implementation iOSAppTests
 
 - (void)setUp
 {
@@ -26,7 +26,7 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in GardenAppMasterTests");
+    STFail(@"Unit tests are not implemented yet in iOSAppTests");
 }
 
 @end

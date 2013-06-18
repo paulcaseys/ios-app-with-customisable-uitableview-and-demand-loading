@@ -1,8 +1,8 @@
 //
-//  GardenAppMasterViewController.h
-//  GardenAppMaster
+//  MasterViewController.h
+//  iOSApp
 //
-//  Created by PAUL CASEY on 2013-06-11.
+//  Created by PAUL CASEY on 2013-06-18.
 //  Copyright (c) 2013 PAUL CASEY. All rights reserved.
 //
 
@@ -11,10 +11,10 @@
 #import "FTWCache.h"
 #import "NSString+MD5.h"
 
-@class GardenAppDetailViewController;
+@class DetailViewController;
 
 
-@interface GardenAppMasterViewController : UIViewController {
+@interface MasterViewController : UIViewController {
     
     NSURLConnection *theConnection;
     
@@ -23,7 +23,8 @@
 	IBOutlet UIImageView *imageView;
 }
 
-@property (strong, nonatomic) GardenAppDetailViewController *detailViewController;
+@property (strong, nonatomic) DetailViewController *detailViewController;
+
 
 
 @end

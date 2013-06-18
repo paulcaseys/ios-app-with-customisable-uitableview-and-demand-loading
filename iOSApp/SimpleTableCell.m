@@ -1,13 +1,12 @@
 //
 //  SimpleTableCell.m
-//  GardenAppMaster
+//  iOSApp
 //
-//  Created by PAUL CASEY on 2013-06-16.
+//  Created by PAUL CASEY on 2013-06-18.
 //  Copyright (c) 2013 PAUL CASEY. All rights reserved.
 //
 
 #import "SimpleTableCell.h"
-
 
 @implementation SimpleTableCell
 
@@ -27,7 +26,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

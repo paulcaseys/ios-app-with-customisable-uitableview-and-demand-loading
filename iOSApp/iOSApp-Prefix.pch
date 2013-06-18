@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'GardenAppMaster' target in the 'GardenAppMaster' project
+// Prefix header for all source files of the 'iOSApp' target in the 'iOSApp' project
 //
 
 #import <Availability.h>

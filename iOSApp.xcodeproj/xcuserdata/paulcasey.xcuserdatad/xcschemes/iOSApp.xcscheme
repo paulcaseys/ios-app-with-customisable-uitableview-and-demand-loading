@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "465677F2176705D500CD8D3B"
-               BuildableName = "GardenAppMaster.app"
-               BlueprintName = "GardenAppMaster"
-               ReferencedContainer = "container:GardenAppMaster.xcodeproj">
+               BlueprintIdentifier = "4672C5C2177017F400430C1A"
+               BuildableName = "iOSApp.app"
+               BlueprintName = "iOSApp"
+               ReferencedContainer = "container:iOSApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,20 +32,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4656781E176705D500CD8D3B"
-               BuildableName = "GardenAppMasterTests.octest"
-               BlueprintName = "GardenAppMasterTests"
-               ReferencedContainer = "container:GardenAppMaster.xcodeproj">
+               BlueprintIdentifier = "4672C5EE177017F400430C1A"
+               BuildableName = "iOSAppTests.octest"
+               BlueprintName = "iOSAppTests"
+               ReferencedContainer = "container:iOSApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "465677F2176705D500CD8D3B"
-            BuildableName = "GardenAppMaster.app"
-            BlueprintName = "GardenAppMaster"
-            ReferencedContainer = "container:GardenAppMaster.xcodeproj">
+            BlueprintIdentifier = "4672C5C2177017F400430C1A"
+            BuildableName = "iOSApp.app"
+            BlueprintName = "iOSApp"
+            ReferencedContainer = "container:iOSApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -61,10 +61,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "465677F2176705D500CD8D3B"
-            BuildableName = "GardenAppMaster.app"
-            BlueprintName = "GardenAppMaster"
-            ReferencedContainer = "container:GardenAppMaster.xcodeproj">
+            BlueprintIdentifier = "4672C5C2177017F400430C1A"
+            BuildableName = "iOSApp.app"
+            BlueprintName = "iOSApp"
+            ReferencedContainer = "container:iOSApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -79,10 +79,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "465677F2176705D500CD8D3B"
-            BuildableName = "GardenAppMaster.app"
-            BlueprintName = "GardenAppMaster"
-            ReferencedContainer = "container:GardenAppMaster.xcodeproj">
+            BlueprintIdentifier = "4672C5C2177017F400430C1A"
+            BuildableName = "iOSApp.app"
+            BlueprintName = "iOSApp"
+            ReferencedContainer = "container:iOSApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
