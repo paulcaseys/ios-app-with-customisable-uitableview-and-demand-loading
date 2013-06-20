@@ -11,10 +11,14 @@
 #import "FTWCache.h"
 #import "NSString+MD5.h"
 
+// google analytics
+#import "GAITrackedViewController.h"
+#import "GAI.h"
+
 @class DetailViewController;
 
-
-@interface MasterViewController : UIViewController {
+// if not using google anayltics, then use UIViewController instead of GAITrackedViewController
+@interface MasterViewController : GAITrackedViewController {
     
     NSURLConnection *theConnection;
     

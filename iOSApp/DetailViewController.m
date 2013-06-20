@@ -26,6 +26,12 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    // Google analytics event tracking
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker sendView:@"Detail Screen"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.

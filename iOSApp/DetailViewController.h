@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+// google analytics
+#import "GAITrackedViewController.h"
+#import "GAI.h"
+
 @interface DetailViewController  : UIViewController {
     NSMutableDictionary *_object;
 }

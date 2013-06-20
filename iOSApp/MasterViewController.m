@@ -10,7 +10,6 @@
 #import "DetailViewController.h"
 #import "SimpleTableCell.h"
 
-
 BOOL animationRunning;
 int section;
 
@@ -49,10 +48,17 @@ int section;
     return self;
 }
 
+
+- (void)viewDidAppear:(BOOL)animated {
+    // Google analytics event tracking
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker sendView:@"Master Screen"];
+}
+
 // view is ready
 - (void)viewDidLoad {
     
-    [super viewDidLoad];
+    [super viewDidLoad];   
     
 	// Do any additional setup after loading the view, typically from a nib.
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;

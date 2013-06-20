@@ -39,6 +39,10 @@
 		4672C62D1770187E00430C1A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4672C6231770187E00430C1A /* SBJsonWriter.m */; };
 		4672C63517701DD400430C1A /* SimpleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4672C63417701DD400430C1A /* SimpleTableCell.xib */; };
 		4672C63817701E0800430C1A /* SimpleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4672C63717701E0800430C1A /* SimpleTableCell.m */; };
+		4679AFCD1772F69800418E85 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4679AFCB1772F69800418E85 /* libGoogleAnalytics.a */; };
+		4679AFCE1772F69800418E85 /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4679AFCC1772F69800418E85 /* libGoogleAnalytics_debug.a */; };
+		46E1D8CF1772F7B100D58543 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E1D8CE1772F7B100D58543 /* CoreData.framework */; };
+		46E1D8D11772F7C200D58543 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E1D8D01772F7C200D58543 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +109,15 @@
 		4672C63417701DD400430C1A /* SimpleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleTableCell.xib; sourceTree = "<group>"; };
 		4672C63617701E0800430C1A /* SimpleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableCell.h; sourceTree = "<group>"; };
 		4672C63717701E0800430C1A /* SimpleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableCell.m; sourceTree = "<group>"; };
+		4679AFC61772F69800418E85 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		4679AFC71772F69800418E85 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		4679AFC81772F69800418E85 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		4679AFC91772F69800418E85 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransaction.h; sourceTree = "<group>"; };
+		4679AFCA1772F69800418E85 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
+		4679AFCB1772F69800418E85 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		4679AFCC1772F69800418E85 /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
+		46E1D8CE1772F7B100D58543 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		46E1D8D01772F7C200D58543 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +125,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46E1D8D11772F7C200D58543 /* SystemConfiguration.framework in Frameworks */,
+				46E1D8CF1772F7B100D58543 /* CoreData.framework in Frameworks */,
 				4672C5C7177017F400430C1A /* UIKit.framework in Frameworks */,
 				4672C5C9177017F400430C1A /* Foundation.framework in Frameworks */,
 				4672C5CB177017F400430C1A /* CoreGraphics.framework in Frameworks */,
+				4679AFCD1772F69800418E85 /* libGoogleAnalytics.a in Frameworks */,
+				4679AFCE1772F69800418E85 /* libGoogleAnalytics_debug.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +151,8 @@
 		4672C5BA177017F400430C1A = {
 			isa = PBXGroup;
 			children = (
+				46E1D8D01772F7C200D58543 /* SystemConfiguration.framework */,
+				46E1D8CE1772F7B100D58543 /* CoreData.framework */,
 				4672C5CC177017F400430C1A /* iOSApp */,
 				4672C5F6177017F400430C1A /* iOSAppTests */,
 				4672C5C5177017F400430C1A /* Frameworks */,
@@ -153,6 +172,7 @@
 		4672C5C5177017F400430C1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4679AFC51772F69800418E85 /* Google-Analytics */,
 				4672C60E1770187E00430C1A /* JSON-Framework */,
 				4672C6071770187600430C1A /* FTWCache */,
 				4672C5C6177017F400430C1A /* UIKit.framework */,
@@ -254,6 +274,21 @@
 			);
 			name = "JSON-Framework";
 			path = "iOSApp/Frameworks/JSON-Framework";
+			sourceTree = "<group>";
+		};
+		4679AFC51772F69800418E85 /* Google-Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				4679AFC61772F69800418E85 /* GAI.h */,
+				4679AFC71772F69800418E85 /* GAITrackedViewController.h */,
+				4679AFC81772F69800418E85 /* GAITracker.h */,
+				4679AFC91772F69800418E85 /* GAITransaction.h */,
+				4679AFCA1772F69800418E85 /* GAITransactionItem.h */,
+				4679AFCB1772F69800418E85 /* libGoogleAnalytics.a */,
+				4679AFCC1772F69800418E85 /* libGoogleAnalytics_debug.a */,
+			);
+			name = "Google-Analytics";
+			path = "iOSApp/Frameworks/Google-Analytics";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -505,6 +540,10 @@
 				GCC_PREFIX_HEADER = "iOSApp/iOSApp-Prefix.pch";
 				INFOPLIST_FILE = "iOSApp/iOSApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/iOSApp/Frameworks/Google-Analytics\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -517,6 +556,10 @@
 				GCC_PREFIX_HEADER = "iOSApp/iOSApp-Prefix.pch";
 				INFOPLIST_FILE = "iOSApp/iOSApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/iOSApp/Frameworks/Google-Analytics\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -575,6 +618,7 @@
 				4672C603177017F400430C1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4672C604177017F400430C1A /* Build configuration list for PBXNativeTarget "iOSAppTests" */ = {
 			isa = XCConfigurationList;
@@ -583,6 +627,7 @@
 				4672C606177017F400430C1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
