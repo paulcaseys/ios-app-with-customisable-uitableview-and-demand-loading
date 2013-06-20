@@ -182,6 +182,60 @@ Altering the backbutton (in the parent .m file)
 
 
 ***
+Google Analytics
+----
+
+#### before you begin
+
+you will need
+A new Google Analytics app property and profile.
+https://support.google.com/analytics/answer/2614741?hl=en
+
+#### 1. change the GUID
+in the AppDelegate.m file, change the following line to use your own GUID
+
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-41820379-2"];
+
+
+#### 2. add tracking to your views
+
+add this to every .h view you want to track events in
+
+    // google analytics
+    #import "GAITrackedViewController.h"
+    #import "GAI.h"
+
+and change the interface in .h
+
+    @interface MasterViewController : GAITrackedViewController
+
+
+In the .m file of any view you want to track, add this to your `viewDidAppear` method. This tracking method is similar to "event tracking" it can be called anywhere
+
+
+    - (void)viewDidAppear:(BOOL)animated {
+        // Google analytics event tracking
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker sendView:@"Master Screen"];
+    }
+
+#### 3. verifying that it works
+
+you should see some google logs in your console, but you can also check analytics
+
+now go to analytics.google.com and you can view the
+
+choose '[your project]' from '[your name]'
+
+then go to
+reporting > realtime > Screens
+then the tab which says 'Screen Views (last 30 mins)'
+
+it should display the screen views!
+
+
+
+***
 Recommended, but not required
 ------------------
 use cocoapods for organising your frameworks
