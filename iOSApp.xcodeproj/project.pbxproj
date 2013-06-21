@@ -43,6 +43,10 @@
 		4679AFCE1772F69800418E85 /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4679AFCC1772F69800418E85 /* libGoogleAnalytics_debug.a */; };
 		46E1D8CF1772F7B100D58543 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E1D8CE1772F7B100D58543 /* CoreData.framework */; };
 		46E1D8D11772F7C200D58543 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E1D8D01772F7C200D58543 /* SystemConfiguration.framework */; };
+		46E1D8E01774061500D58543 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E1D8DF1774061500D58543 /* QuartzCore.framework */; };
+		46E1D8FA1774145E00D58543 /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E1D8F51774145E00D58543 /* IISideController.m */; };
+		46E1D8FB1774145E00D58543 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E1D8F71774145E00D58543 /* IIViewDeckController.m */; };
+		46E1D8FC1774145E00D58543 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E1D8F91774145E00D58543 /* IIWrapController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +122,13 @@
 		4679AFCC1772F69800418E85 /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
 		46E1D8CE1772F7B100D58543 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		46E1D8D01772F7C200D58543 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		46E1D8DF1774061500D58543 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		46E1D8F41774145E00D58543 /* IISideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IISideController.h; sourceTree = "<group>"; };
+		46E1D8F51774145E00D58543 /* IISideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IISideController.m; sourceTree = "<group>"; };
+		46E1D8F61774145E00D58543 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		46E1D8F71774145E00D58543 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
+		46E1D8F81774145E00D58543 /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
+		46E1D8F91774145E00D58543 /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46E1D8E01774061500D58543 /* QuartzCore.framework in Frameworks */,
 				46E1D8D11772F7C200D58543 /* SystemConfiguration.framework in Frameworks */,
 				46E1D8CF1772F7B100D58543 /* CoreData.framework in Frameworks */,
 				4672C5C7177017F400430C1A /* UIKit.framework in Frameworks */,
@@ -151,6 +163,7 @@
 		4672C5BA177017F400430C1A = {
 			isa = PBXGroup;
 			children = (
+				46E1D8DF1774061500D58543 /* QuartzCore.framework */,
 				46E1D8D01772F7C200D58543 /* SystemConfiguration.framework */,
 				46E1D8CE1772F7B100D58543 /* CoreData.framework */,
 				4672C5CC177017F400430C1A /* iOSApp */,
@@ -172,6 +185,7 @@
 		4672C5C5177017F400430C1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46E1D8F31774145E00D58543 /* ViewDeck */,
 				4679AFC51772F69800418E85 /* Google-Analytics */,
 				4672C60E1770187E00430C1A /* JSON-Framework */,
 				4672C6071770187600430C1A /* FTWCache */,
@@ -289,6 +303,20 @@
 			);
 			name = "Google-Analytics";
 			path = "iOSApp/Frameworks/Google-Analytics";
+			sourceTree = "<group>";
+		};
+		46E1D8F31774145E00D58543 /* ViewDeck */ = {
+			isa = PBXGroup;
+			children = (
+				46E1D8F41774145E00D58543 /* IISideController.h */,
+				46E1D8F51774145E00D58543 /* IISideController.m */,
+				46E1D8F61774145E00D58543 /* IIViewDeckController.h */,
+				46E1D8F71774145E00D58543 /* IIViewDeckController.m */,
+				46E1D8F81774145E00D58543 /* IIWrapController.h */,
+				46E1D8F91774145E00D58543 /* IIWrapController.m */,
+			);
+			name = ViewDeck;
+			path = iOSApp/Frameworks/ViewDeck;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -428,6 +456,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4672C5FE177017F400430C1A /* iOSAppTests.m in Sources */,
+				46E1D8FA1774145E00D58543 /* IISideController.m in Sources */,
+				46E1D8FB1774145E00D58543 /* IIViewDeckController.m in Sources */,
+				46E1D8FC1774145E00D58543 /* IIWrapController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

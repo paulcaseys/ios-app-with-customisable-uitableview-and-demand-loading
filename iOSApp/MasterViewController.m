@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 #import "SimpleTableCell.h"
 
+
 BOOL animationRunning;
 int section;
 
