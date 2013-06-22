@@ -10,12 +10,14 @@
 #import "DetailViewController.h"
 #import "SimpleTableCell.h"
 
+//#import "UITableViewCell+AutoDequeue.h"
+#import "IIViewDeckController.h"
 
 BOOL animationRunning;
 int section;
 
 
-@interface MasterViewController () {
+@interface MasterViewController () <UIGestureRecognizerDelegate, IIViewDeckControllerDelegate>{
     
     // define the dataArray
     NSMutableArray *_dataArray;
@@ -96,8 +98,19 @@ int section;
     animationRunning = YES;
     [self fadeOut:nil finished:nil context:nil];
     
+    UIButton *leftDrawerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 52, 44)];
+    [leftDrawerButton setBackgroundImage:[UIImage imageNamed:@"drawer.png"] forState:UIControlStateNormal];
+    [leftDrawerButton addTarget:self action:@selector(drawerButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    //add the button to the navigation controller
+    [self.navigationController.navigationBar addSubview:leftDrawerButton];
+    
+    
 }
 
+- (void)drawerButtonPressed {
+    [self.viewDeckController toggleLeftViewAnimated:YES];
+}
 
 
 #pragma mark Actions

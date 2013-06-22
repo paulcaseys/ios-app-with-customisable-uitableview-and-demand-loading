@@ -12,6 +12,9 @@
 
 #import "GAI.h"
 
+#import "IIViewDeckController.h"
+#import "MenuViewController.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -26,13 +29,27 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-
+    
     MasterViewController *masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
-    self.window.rootViewController = self.navigationController;
+    
+    // IIViewDeck setup
+    //UINavigationController *masterNavController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
+    UINavigationController* centerViewController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
+    
+    //left
+    UIViewController* menuViewController = [[UIViewController alloc]  initWithNibName:@"MenuViewController" bundle:nil];
+    //UINavigationController *menuNavController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
+     
+    // deck controller
+    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:centerViewController leftViewController:menuViewController rightViewController:nil];
+    deckController.delegateMode = IIViewDeckDelegateOnly;
+    self.window.rootViewController = deckController;
+    
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
