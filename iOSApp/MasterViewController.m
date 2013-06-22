@@ -98,17 +98,17 @@ int section;
     animationRunning = YES;
     [self fadeOut:nil finished:nil context:nil];
     
-    UIButton *leftDrawerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 52, 44)];
-    [leftDrawerButton setBackgroundImage:[UIImage imageNamed:@"drawer.png"] forState:UIControlStateNormal];
-    [leftDrawerButton addTarget:self action:@selector(drawerButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    //add the button to the navigation controller
-    [self.navigationController.navigationBar addSubview:leftDrawerButton];
-    
+    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:@"drawer.png"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(drawerButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [button setFrame:CGRectMake(0, 0, 52, 44)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
 }
 
 - (void)drawerButtonPressed {
+    NSLog(@"hi");
     [self.viewDeckController toggleLeftViewAnimated:YES];
 }
 
