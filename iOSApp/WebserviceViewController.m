@@ -187,13 +187,14 @@
 
 // side menu event handler
 - (void)drawerButtonPressed {
-    [texterFirstName resignFirstResponder];
+    [self.view endEditing:YES];
     [self.viewDeckController toggleLeftViewAnimated:YES];
 }
 
 
 - (IBAction)submitFormButtonTapHandler:(id)sender {
     NSLog(@"hello");
+    [self.view endEditing:YES];
     [self initialiseCosmosSubmission];
     //[self.viewDeckController toggleLeftViewAnimated:YES];
 }
