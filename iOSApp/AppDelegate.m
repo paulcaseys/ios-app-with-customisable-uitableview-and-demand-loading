@@ -16,6 +16,7 @@
 #import "MenuViewController.h"
 
 @implementation AppDelegate
+//@synthesize centerViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Optional: automatically send uncaught exceptions to Google Analytics.
@@ -33,15 +34,15 @@
     MasterViewController *masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
     
     // IIViewDeck setup
-    //UINavigationController *masterNavController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
-    UINavigationController* centerViewController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
     
-    //left
-    UIViewController* menuViewController = [[UIViewController alloc]  initWithNibName:@"MenuViewController" bundle:nil];
-    //UINavigationController *menuNavController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
-     
+    //self.navigationController = centerViewController;
+    
+    // left
+    MenuViewController* menuViewController = [[MenuViewController alloc]  initWithNibName:@"MenuViewController" bundle:nil];
+    
     // deck controller
-    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:centerViewController leftViewController:menuViewController rightViewController:nil];
+    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:self.navigationController leftViewController:menuViewController rightViewController:nil];
     deckController.delegateMode = IIViewDeckDelegateOnly;
     self.window.rootViewController = deckController;
     

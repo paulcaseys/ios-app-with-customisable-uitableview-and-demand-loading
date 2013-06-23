@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class ProfileViewController;
+@class MasterViewController;
+
+
 @interface MenuViewController : UIViewController
+
+@property (strong, nonatomic) IBOutlet UILabel *descriptionTexter;
+
+- (IBAction)homeButtonTapHandler:(id)sender;
+
+@property (strong, nonatomic) ProfileViewController *profileViewController;
+@property (strong, nonatomic) MasterViewController *masterViewController;
 
 @end

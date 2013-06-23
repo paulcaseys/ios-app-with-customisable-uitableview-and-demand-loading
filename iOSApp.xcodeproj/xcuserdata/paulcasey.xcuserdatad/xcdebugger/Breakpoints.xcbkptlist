@@ -32,12 +32,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "iOSApp/AppDelegate.h"
-         timestampString = "393572794.866973"
+         timestampString = "393595145.940936"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "16"
-         endingLineNumber = "16"
-         landmarkName = "navigationController"
+         startingLineNumber = "18"
+         endingLineNumber = "18"
+         landmarkName = "navController"
          landmarkType = "19">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -16,6 +16,7 @@
 #import "GAI.h"
 
 @class DetailViewController;
+@class ProfileViewController;
 
 // if not using google anayltics, then use UIViewController instead of GAITrackedViewController
 @interface MasterViewController : GAITrackedViewController {
@@ -28,6 +29,7 @@
 }
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
+@property (strong, nonatomic) ProfileViewController *profileViewController;
 
 
 

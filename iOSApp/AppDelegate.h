@@ -15,4 +15,6 @@
 
 @property (strong, nonatomic) UINavigationController *navigationController;
 
+//@property (strong, nonatomic) UINavigationController *centerViewController;
+
 @end

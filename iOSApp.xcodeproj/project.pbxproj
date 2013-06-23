@@ -44,8 +44,6 @@
 		46E1D8CF1772F7B100D58543 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E1D8CE1772F7B100D58543 /* CoreData.framework */; };
 		46E1D8D11772F7C200D58543 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E1D8D01772F7C200D58543 /* SystemConfiguration.framework */; };
 		46E1D8E01774061500D58543 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E1D8DF1774061500D58543 /* QuartzCore.framework */; };
-		46E1D90417756B4A00D58543 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E1D90317756B4A00D58543 /* MenuViewController.xib */; };
-		46E1D90717756B8800D58543 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E1D90617756B8800D58543 /* MenuViewController.m */; };
 		46E1D90F17757CF600D58543 /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E1D90A17757CF600D58543 /* IISideController.m */; };
 		46E1D91017757CF600D58543 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E1D90C17757CF600D58543 /* IIViewDeckController.m */; };
 		46E1D91117757CF600D58543 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E1D90E17757CF600D58543 /* IIWrapController.m */; };
@@ -54,6 +52,10 @@
 		46E1D91A177580FF00D58543 /* drawer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E1D915177580FF00D58543 /* drawer@2x.png */; };
 		46E1D91B177580FF00D58543 /* loading-thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E1D916177580FF00D58543 /* loading-thumb.png */; };
 		46E1D91C177580FF00D58543 /* loading-thumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E1D917177580FF00D58543 /* loading-thumb@2x.png */; };
+		46E1D91E17758FCA00D58543 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E1D91D17758FCA00D58543 /* ProfileViewController.xib */; };
+		46E1D92117758FE900D58543 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E1D92017758FE800D58543 /* ProfileViewController.m */; };
+		46E1D9251775B88F00D58543 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E1D9231775B88F00D58543 /* MenuViewController.m */; };
+		46E1D9261775B88F00D58543 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46E1D9241775B88F00D58543 /* MenuViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,9 +132,6 @@
 		46E1D8CE1772F7B100D58543 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		46E1D8D01772F7C200D58543 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		46E1D8DF1774061500D58543 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		46E1D90317756B4A00D58543 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
-		46E1D90517756B8800D58543 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		46E1D90617756B8800D58543 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		46E1D90917757CF600D58543 /* IISideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IISideController.h; sourceTree = "<group>"; };
 		46E1D90A17757CF600D58543 /* IISideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IISideController.m; sourceTree = "<group>"; };
 		46E1D90B17757CF600D58543 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
@@ -144,6 +143,12 @@
 		46E1D915177580FF00D58543 /* drawer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawer@2x.png"; sourceTree = "<group>"; };
 		46E1D916177580FF00D58543 /* loading-thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-thumb.png"; sourceTree = "<group>"; };
 		46E1D917177580FF00D58543 /* loading-thumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-thumb@2x.png"; sourceTree = "<group>"; };
+		46E1D91D17758FCA00D58543 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		46E1D91F17758FE800D58543 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		46E1D92017758FE800D58543 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		46E1D9221775B88F00D58543 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		46E1D9231775B88F00D58543 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		46E1D9241775B88F00D58543 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,17 +224,20 @@
 				4672C5D6177017F400430C1A /* AppDelegate.m */,
 				4672C5DE177017F400430C1A /* MasterViewController.h */,
 				4672C5DF177017F400430C1A /* MasterViewController.m */,
+				4672C5E4177017F400430C1A /* MasterViewController.xib */,
 				4672C5E1177017F400430C1A /* DetailViewController.h */,
 				4672C5E2177017F400430C1A /* DetailViewController.m */,
-				4672C5E4177017F400430C1A /* MasterViewController.xib */,
+				4672C5E7177017F400430C1A /* DetailViewController.xib */,
 				4672C63617701E0800430C1A /* SimpleTableCell.h */,
 				4672C63717701E0800430C1A /* SimpleTableCell.m */,
 				4672C63417701DD400430C1A /* SimpleTableCell.xib */,
-				4672C5E7177017F400430C1A /* DetailViewController.xib */,
 				4672C5CD177017F400430C1A /* Supporting Files */,
-				46E1D90517756B8800D58543 /* MenuViewController.h */,
-				46E1D90617756B8800D58543 /* MenuViewController.m */,
-				46E1D90317756B4A00D58543 /* MenuViewController.xib */,
+				46E1D91F17758FE800D58543 /* ProfileViewController.h */,
+				46E1D92017758FE800D58543 /* ProfileViewController.m */,
+				46E1D91D17758FCA00D58543 /* ProfileViewController.xib */,
+				46E1D9221775B88F00D58543 /* MenuViewController.h */,
+				46E1D9231775B88F00D58543 /* MenuViewController.m */,
+				46E1D9241775B88F00D58543 /* MenuViewController.xib */,
 			);
 			path = iOSApp;
 			sourceTree = "<group>";
@@ -429,12 +437,13 @@
 				4672C5E6177017F400430C1A /* MasterViewController.xib in Resources */,
 				4672C5E9177017F400430C1A /* DetailViewController.xib in Resources */,
 				4672C63517701DD400430C1A /* SimpleTableCell.xib in Resources */,
-				46E1D90417756B4A00D58543 /* MenuViewController.xib in Resources */,
 				46E1D918177580FF00D58543 /* contact-me.jpg in Resources */,
 				46E1D919177580FF00D58543 /* drawer.png in Resources */,
 				46E1D91A177580FF00D58543 /* drawer@2x.png in Resources */,
 				46E1D91B177580FF00D58543 /* loading-thumb.png in Resources */,
 				46E1D91C177580FF00D58543 /* loading-thumb@2x.png in Resources */,
+				46E1D91E17758FCA00D58543 /* ProfileViewController.xib in Resources */,
+				46E1D9261775B88F00D58543 /* MenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,10 +495,11 @@
 				4672C62C1770187E00430C1A /* SBJsonStreamWriterState.m in Sources */,
 				4672C62D1770187E00430C1A /* SBJsonWriter.m in Sources */,
 				4672C63817701E0800430C1A /* SimpleTableCell.m in Sources */,
-				46E1D90717756B8800D58543 /* MenuViewController.m in Sources */,
 				46E1D90F17757CF600D58543 /* IISideController.m in Sources */,
 				46E1D91017757CF600D58543 /* IIViewDeckController.m in Sources */,
 				46E1D91117757CF600D58543 /* IIWrapController.m in Sources */,
+				46E1D92117758FE900D58543 /* ProfileViewController.m in Sources */,
+				46E1D9251775B88F00D58543 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
