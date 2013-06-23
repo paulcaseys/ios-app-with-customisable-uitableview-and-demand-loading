@@ -50,6 +50,8 @@
 - (void)configureView {
     // Update the user interface for the detail item.
     
+    self.title = @"profile";
+    
     if (self.detailItem) {
         //NSLog(@"_object: %@", _object);
         

@@ -12,7 +12,7 @@
 #import "GAITrackedViewController.h"
 #import "GAI.h"
 
-@interface DetailViewController  : UIViewController {
+@interface DetailViewController  : GAITrackedViewController {
     NSMutableDictionary *_object;
 }
 @property (strong, nonatomic) NSMutableDictionary *_object;

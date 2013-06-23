@@ -7,8 +7,10 @@
 //
 
 #import "MenuViewController.h"
-#import "ProfileViewController.h"
 #import "MasterViewController.h"
+#import "ProfileViewController.h"
+#import "PostViewController.h"
+
 #import "IIViewDeckController.h"
 #import "AppDelegate.h"
 
@@ -31,7 +33,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.descriptionTexter.text = @"hello";
+    //self.descriptionTexter.text = @"hello";
     
 }
 
@@ -69,6 +71,24 @@
     
     // defines the next view and hides the backbutton
     ProfileViewController *newView = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+    newView.navigationItem.hidesBackButton = YES;
+    
+    // pushes the next view onto stage
+    [objAppDelegate.navigationController pushViewController:newView animated:NO];
+    
+    // close the left panel
+    [self.viewDeckController closeLeftView];
+    
+}
+
+// button handler
+- (IBAction)postButtonTapHandler:(id)sender {
+    
+    // defines the app delegate
+    AppDelegate *objAppDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    // defines the next view and hides the backbutton
+    PostViewController *newView = [[PostViewController alloc] initWithNibName:@"PostViewController" bundle:nil];
     newView.navigationItem.hidesBackButton = YES;
     
     // pushes the next view onto stage

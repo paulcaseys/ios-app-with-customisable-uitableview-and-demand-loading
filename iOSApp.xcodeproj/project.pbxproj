@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46592F651776B4EF00E798A8 /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46592F631776B4EF00E798A8 /* PostViewController.m */; };
+		46592F661776B4EF00E798A8 /* PostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46592F641776B4EF00E798A8 /* PostViewController.xib */; };
 		4672C5C7177017F400430C1A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4672C5C6177017F400430C1A /* UIKit.framework */; };
 		4672C5C9177017F400430C1A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4672C5C8177017F400430C1A /* Foundation.framework */; };
 		4672C5CB177017F400430C1A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4672C5CA177017F400430C1A /* CoreGraphics.framework */; };
@@ -69,6 +71,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		46592F621776B4EF00E798A8 /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
+		46592F631776B4EF00E798A8 /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
+		46592F641776B4EF00E798A8 /* PostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewController.xib; sourceTree = "<group>"; };
 		4672C5C3177017F400430C1A /* iOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4672C5C6177017F400430C1A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4672C5C8177017F400430C1A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -222,6 +227,10 @@
 			children = (
 				4672C5D5177017F400430C1A /* AppDelegate.h */,
 				4672C5D6177017F400430C1A /* AppDelegate.m */,
+				46E1D9221775B88F00D58543 /* MenuViewController.h */,
+				46E1D9231775B88F00D58543 /* MenuViewController.m */,
+				46E1D9241775B88F00D58543 /* MenuViewController.xib */,
+				4672C5CD177017F400430C1A /* Supporting Files */,
 				4672C5DE177017F400430C1A /* MasterViewController.h */,
 				4672C5DF177017F400430C1A /* MasterViewController.m */,
 				4672C5E4177017F400430C1A /* MasterViewController.xib */,
@@ -231,13 +240,12 @@
 				4672C63617701E0800430C1A /* SimpleTableCell.h */,
 				4672C63717701E0800430C1A /* SimpleTableCell.m */,
 				4672C63417701DD400430C1A /* SimpleTableCell.xib */,
-				4672C5CD177017F400430C1A /* Supporting Files */,
 				46E1D91F17758FE800D58543 /* ProfileViewController.h */,
 				46E1D92017758FE800D58543 /* ProfileViewController.m */,
 				46E1D91D17758FCA00D58543 /* ProfileViewController.xib */,
-				46E1D9221775B88F00D58543 /* MenuViewController.h */,
-				46E1D9231775B88F00D58543 /* MenuViewController.m */,
-				46E1D9241775B88F00D58543 /* MenuViewController.xib */,
+				46592F621776B4EF00E798A8 /* PostViewController.h */,
+				46592F631776B4EF00E798A8 /* PostViewController.m */,
+				46592F641776B4EF00E798A8 /* PostViewController.xib */,
 			);
 			path = iOSApp;
 			sourceTree = "<group>";
@@ -444,6 +452,7 @@
 				46E1D91C177580FF00D58543 /* loading-thumb@2x.png in Resources */,
 				46E1D91E17758FCA00D58543 /* ProfileViewController.xib in Resources */,
 				46E1D9261775B88F00D58543 /* MenuViewController.xib in Resources */,
+				46592F661776B4EF00E798A8 /* PostViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +509,7 @@
 				46E1D91117757CF600D58543 /* IIWrapController.m in Sources */,
 				46E1D92117758FE900D58543 /* ProfileViewController.m in Sources */,
 				46E1D9251775B88F00D58543 /* MenuViewController.m in Sources */,
+				46592F651776B4EF00E798A8 /* PostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

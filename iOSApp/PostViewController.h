@@ -1,8 +1,8 @@
 //
-//  ProfileViewController.h
+//  PostViewController.h
 //  iOSApp
 //
-//  Created by PAUL CASEY on 2013-06-22.
+//  Created by PAUL CASEY on 2013-06-23.
 //  Copyright (c) 2013 PAUL CASEY. All rights reserved.
 //
 
@@ -12,11 +12,9 @@
 #import "GAITrackedViewController.h"
 #import "GAI.h"
 
-@interface ProfileViewController  : GAITrackedViewController {
+@interface PostViewController  : GAITrackedViewController {
     NSMutableDictionary *_object;
 }
 @property (strong, nonatomic) NSMutableDictionary *_object;
-@property (strong, nonatomic) id detailItem;
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @end
