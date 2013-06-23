@@ -9,7 +9,7 @@
 #import "MenuViewController.h"
 #import "MasterViewController.h"
 #import "ProfileViewController.h"
-#import "PostViewController.h"
+#import "WebserviceViewController.h"
 
 #import "IIViewDeckController.h"
 #import "AppDelegate.h"
@@ -82,13 +82,13 @@
 }
 
 // button handler
-- (IBAction)postButtonTapHandler:(id)sender {
+- (IBAction)webserviceButtonTapHandler:(id)sender {
     
     // defines the app delegate
     AppDelegate *objAppDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     // defines the next view and hides the backbutton
-    PostViewController *newView = [[PostViewController alloc] initWithNibName:@"PostViewController" bundle:nil];
+    WebserviceViewController *newView = [[WebserviceViewController alloc] initWithNibName:@"WebserviceViewController" bundle:nil];
     newView.navigationItem.hidesBackButton = YES;
     
     // pushes the next view onto stage

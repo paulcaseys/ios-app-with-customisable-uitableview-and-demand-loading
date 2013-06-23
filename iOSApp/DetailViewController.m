@@ -43,14 +43,14 @@
 - (void)configureView {
     // Update the user interface for the detail item.
     
-    if (self.detailItem) {
+    if (_object) {
         //NSLog(@"_object: %@", _object);
         
         // adds title to header
         self.title = [_object valueForKey:@"page_title"];
         
         // adds description to page
-        self.detailDescriptionLabel.text = [self.detailItem description];
+        self.detailDescriptionLabel.text = [_object valueForKey:@"img75"];
     }
 }
 

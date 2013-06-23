@@ -52,7 +52,7 @@
     
     self.title = @"profile";
     
-    if (self.detailItem) {
+    if (_object) {
         //NSLog(@"_object: %@", _object);
         
         // adds title to header
