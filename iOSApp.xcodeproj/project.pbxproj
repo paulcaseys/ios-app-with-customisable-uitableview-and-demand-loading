@@ -10,6 +10,7 @@
 		46592F6A1776CF5500E798A8 /* WebserviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46592F681776CF5400E798A8 /* WebserviceViewController.m */; };
 		46592F6B1776CF5500E798A8 /* WebserviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46592F691776CF5400E798A8 /* WebserviceViewController.xib */; };
 		46592F6E1776DF6400E798A8 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46592F6D1776DF6300E798A8 /* UIPlaceHolderTextView.m */; };
+		46592F72177707DC00E798A8 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 46592F71177707DC00E798A8 /* Reachability.m */; };
 		4672C5C7177017F400430C1A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4672C5C6177017F400430C1A /* UIKit.framework */; };
 		4672C5C9177017F400430C1A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4672C5C8177017F400430C1A /* Foundation.framework */; };
 		4672C5CB177017F400430C1A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4672C5CA177017F400430C1A /* CoreGraphics.framework */; };
@@ -77,6 +78,8 @@
 		46592F691776CF5400E798A8 /* WebserviceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebserviceViewController.xib; sourceTree = "<group>"; };
 		46592F6C1776DF6300E798A8 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		46592F6D1776DF6300E798A8 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
+		46592F70177707DC00E798A8 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		46592F71177707DC00E798A8 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		4672C5C3177017F400430C1A /* iOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4672C5C6177017F400430C1A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4672C5C8177017F400430C1A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -188,6 +191,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46592F6F177707DC00E798A8 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				46592F70177707DC00E798A8 /* Reachability.h */,
+				46592F71177707DC00E798A8 /* Reachability.m */,
+			);
+			name = Reachability;
+			path = iOSApp/Frameworks/Reachability;
+			sourceTree = "<group>";
+		};
 		4672C5BA177017F400430C1A = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +226,7 @@
 		4672C5C5177017F400430C1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46592F6F177707DC00E798A8 /* Reachability */,
 				46E1D90817757CF600D58543 /* ViewDeck */,
 				4679AFC51772F69800418E85 /* Google-Analytics */,
 				4672C60E1770187E00430C1A /* JSON-Framework */,
@@ -516,6 +530,7 @@
 				46E1D9251775B88F00D58543 /* MenuViewController.m in Sources */,
 				46592F6A1776CF5500E798A8 /* WebserviceViewController.m in Sources */,
 				46592F6E1776DF6400E798A8 /* UIPlaceHolderTextView.m in Sources */,
+				46592F72177707DC00E798A8 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
