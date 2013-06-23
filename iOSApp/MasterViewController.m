@@ -99,8 +99,8 @@ int section;
         
     
     // initialise animation
-    animationRunning = YES;
-    [self fadeOut:nil finished:nil context:nil];
+    //animationRunning = YES;
+    //[self fadeOut:nil finished:nil context:nil];
     
     // menu button
     UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
