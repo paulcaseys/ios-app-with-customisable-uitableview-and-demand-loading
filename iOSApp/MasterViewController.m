@@ -14,6 +14,8 @@
 //#import "UITableViewCell+AutoDequeue.h"
 #import "IIViewDeckController.h"
 
+#include <stdlib.h>
+
 BOOL animationRunning;
 int section;
 
@@ -119,38 +121,50 @@ int section;
     dispatch_queue_t feedQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     dispatch_async(feedQueue, ^{
         
+        // random number for cachebusting
+        int randomNumber = arc4random() % 999999999;
+        
         // need to parse the url because pipes in the url cause errors
-        NSString *unDecodedURL =[NSString stringWithFormat:@"http://cosmos.is/api/service/data/format/json/?project_name=SummerAtTarget&project_password=6CB4816A23A965B5DFD58E45F4C23&table=unique_references&batch=1&batchSize=6&whereConditionArray=project_id||9&select=*&orderBy=vote_count||desc&rand=1"];
+        NSString *unDecodedURL =[NSString stringWithFormat:@"http://cosmos.is/api/service/data/format/json/?project_name=SummerAtTarget&project_password=6CB4816A23A965B5DFD58E45F4C23&table=unique_references&batch=1&batchSize=6&whereConditionArray=project_id||9&select=*&orderBy=vote_count||desc&cacheBuster=%d", randomNumber];
         NSURL *decodedUrl = [NSURL URLWithString:[unDecodedURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
         NSData *url = [NSData dataWithContentsOfURL:decodedUrl];
         
+        NSLog(@"url: %@", unDecodedURL);
         
         NSError *err;
         
-        NSDictionary* json1 = [NSJSONSerialization
+        NSDictionary* jsonResponse = [NSJSONSerialization
                                JSONObjectWithData:url
                                options:kNilOptions
                                error:&err];
         
-        // FIRST GROUP OF ITEMS
-        for (NSMutableDictionary *itemFromGroup1 in json1){
-            // you could set up a condition here to detect which category it is in, then define which array to place it in
-            [self parseAndPushCosmosItemIntoArray:itemFromGroup1 theArray:_firstItemsArray];
-        }
-        // SECOND GROUP OF ITEMS (this could be from a different feed)
-        for (NSMutableDictionary *itemFromGroup2 in json1){
-            // you could set up a condition here to detect which category it is in, then define which array to place it in
-            [self parseAndPushCosmosItemIntoArray:itemFromGroup2 theArray:_secondItemsArray];
-        }
-        // now put them into the _dataArray
-        [_dataArray addObject:[NSDictionary dictionaryWithObject:_firstItemsArray forKey:@"data"]];
-        [_dataArray addObject:[NSDictionary dictionaryWithObject:_secondItemsArray forKey:@"data"]];
         
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             NSLog(@"loading complete!");
-            // reload table
-            [tableView reloadData];
+            
+            
+            if (!jsonResponse) {
+                NSLog(@"NSError: %@", err);
+            } else {
+                
+                // FIRST GROUP OF ITEMS
+                for (NSMutableDictionary *itemFromGroup1 in jsonResponse){
+                    // you could set up a condition here to detect which category it is in, then define which array to place it in
+                    [self parseAndPushCosmosItemIntoArray:itemFromGroup1 theArray:_firstItemsArray];
+                }
+                // SECOND GROUP OF ITEMS (this could be from a different feed)
+                for (NSMutableDictionary *itemFromGroup2 in jsonResponse){
+                    // you could set up a condition here to detect which category it is in, then define which array to place it in
+                    [self parseAndPushCosmosItemIntoArray:itemFromGroup2 theArray:_secondItemsArray];
+                }
+                // now put them into the _dataArray
+                [_dataArray addObject:[NSDictionary dictionaryWithObject:_firstItemsArray forKey:@"data"]];
+                [_dataArray addObject:[NSDictionary dictionaryWithObject:_secondItemsArray forKey:@"data"]];
+                
+                // reload table
+                [tableView reloadData];
+            }
         });
         
     });
