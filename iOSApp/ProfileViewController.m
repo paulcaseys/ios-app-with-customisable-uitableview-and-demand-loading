@@ -7,6 +7,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "IIViewDeckController.h"
 
 @interface ProfileViewController ()
 - (void)configureView;
@@ -36,6 +37,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    // menu button
+    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:@"drawer.png"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(drawerButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [button setFrame:CGRectMake(0, 0, 52, 44)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     [self configureView];
 }
@@ -67,6 +74,18 @@
     }
     return self;
 }
+
+
+
+// EVENT HANDLERS
+
+
+// side menu event handler
+- (void)drawerButtonPressed {
+    [self.viewDeckController toggleLeftViewAnimated:YES];
+}
+
+
 
 @end
 

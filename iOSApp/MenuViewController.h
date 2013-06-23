@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *descriptionTexter;
 
 - (IBAction)homeButtonTapHandler:(id)sender;
+- (IBAction)profileButtonTapHandler:(id)sender;
 
 @property (strong, nonatomic) ProfileViewController *profileViewController;
 @property (strong, nonatomic) MasterViewController *masterViewController;

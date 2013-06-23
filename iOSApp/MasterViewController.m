@@ -108,11 +108,6 @@ int section;
     
 }
 
-// side menu event handler
-- (void)drawerButtonPressed {
-    NSLog(@"hi");
-    [self.viewDeckController toggleLeftViewAnimated:YES];
-}
 
 
 #pragma mark Actions
@@ -289,30 +284,9 @@ int section;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
     [theTableView deselectRowAtIndexPath:[theTableView indexPathForSelectedRow] animated:YES];
 }
-// side menu event handler
-- (void)testMethod:(id)sender {
-    NSLog(@"hittt");
-    //[self.viewDeckController toggleLeftViewAnimated:YES];
-}
-/*- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (!self.profileViewController) {
-        self.profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
-    }
-    // traverses arrays to find the object
-    //NSMutableDictionary *dictionary = [_dataArray objectAtIndex:indexPath.section];
-    //NSArray *array = [dictionary objectForKey:@"data"];
-    //NSMutableDictionary *object = array[indexPath.row];
-    
-    // custom back button text
-    //NSString *backButtonText = @"back";
-    //UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: backButtonText style: UIBarButtonItemStyleBordered target: nil action: nil];
-    //[[self navigationItem] setBackBarButtonItem: newBackButton];
-    
-    //self.profileViewController.detailItem = object;
-    //self.profileViewController._object = object;
-    [self.navigationController pushViewController:self.profileViewController animated:YES];
-    [theTableView deselectRowAtIndexPath:[theTableView indexPathForSelectedRow] animated:YES];
-}*/
+
+
+
 
 // EXAMPLE ANIMATION
 
@@ -337,6 +311,18 @@ int section;
     [texter setAlpha:1.00];
     [UIView commitAnimations];
 }
+
+
+
+
+// EVENT HANDLERS
+
+// side menu event handler
+- (void)drawerButtonPressed {
+    [self.viewDeckController toggleLeftViewAnimated:YES];
+}
+
+
 
 
 @end

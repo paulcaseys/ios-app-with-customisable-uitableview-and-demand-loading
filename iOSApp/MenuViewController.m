@@ -9,6 +9,7 @@
 #import "MenuViewController.h"
 #import "ProfileViewController.h"
 #import "MasterViewController.h"
+#import "IIViewDeckController.h"
 #import "AppDelegate.h"
 
 @interface MenuViewController ()
@@ -42,40 +43,43 @@
 
 // EVENT LISTENTERS
 
+// button handler
 - (IBAction)homeButtonTapHandler:(id)sender {
-    //[appDelegate testMethod];
-    //AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
-    
-    
-    NSLog(@"gday");
-    
+    // defines the app delegate
     AppDelegate *objAppDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    ProfileViewController *s=[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
-    [objAppDelegate.navigationController pushViewController:s animated:YES];
+    // defines the next view and hides the backbutton
+    MasterViewController *newView = [[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
+    newView.navigationItem.hidesBackButton = YES;
     
-    //AppDelegate *del = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    //[del.navigationController pushViewController:self.profileViewController animated:YES];
-    /*if (!appDelegate.centerViewController.profileViewController) {
-        appDelegate.centerViewController.profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
-    }
-     
-    // traverses arrays to find the object
-    //NSMutableDictionary *dictionary = [_dataArray objectAtIndex:indexPath.section];
-    //NSArray *array = [dictionary objectForKey:@"data"];
-    //NSMutableDictionary *object = array[indexPath.row];
+    // pushes the next view onto stage
+    [objAppDelegate.navigationController pushViewController:newView animated:NO];
     
-    // custom back button text
-    //NSString *backButtonText = @"back";
-    //UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: backButtonText style: UIBarButtonItemStyleBordered target: nil action: nil];
-    //[[self navigationItem] setBackBarButtonItem: newBackButton];
-    
-    //self.profileViewController.detailItem = object;
-    //self.profileViewController._object = object;
-    [self.navigationController pushViewController:self.profileViewController animated:YES];
-    [theTableView deselectRowAtIndexPath:[theTableView indexPathForSelectedRow] animated:YES];
-    */
+    // close the left panel
+    [self.viewDeckController closeLeftView];
+
 }
+
+// button handler
+- (IBAction)profileButtonTapHandler:(id)sender {
+    
+    // defines the app delegate
+    AppDelegate *objAppDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    // defines the next view and hides the backbutton
+    ProfileViewController *newView = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+    newView.navigationItem.hidesBackButton = YES;
+    
+    // pushes the next view onto stage
+    [objAppDelegate.navigationController pushViewController:newView animated:NO];
+    
+    // close the left panel
+    [self.viewDeckController closeLeftView];
+    
+}
+
+
+
 
 @end
