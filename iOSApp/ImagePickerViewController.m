@@ -96,13 +96,9 @@
     if (!imagePickerController) {
         imagePickerController = [[UIImagePickerController alloc] init];
         
-        // If our device has a camera, we want to take a picture, otherwise, we just pick from
-        // photo library
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            [imagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-        } else {
-            [imagePickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        }
+        // only provides the option to choose from library
+        // may want to give the user the option to choose library or camera
+        [imagePickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         
         // image picker needs a delegate so we can respond to its messages
         [imagePickerController setDelegate:self];
