@@ -18,6 +18,7 @@
 
 - (IBAction)homeButtonTapHandler:(id)sender;
 - (IBAction)profileButtonTapHandler:(id)sender;
+- (IBAction)imagePickerButtonTapHandler:(id)sender;
 
 @property (strong, nonatomic) MasterViewController *masterViewController;
 @property (strong, nonatomic) ProfileViewController *profileViewController;

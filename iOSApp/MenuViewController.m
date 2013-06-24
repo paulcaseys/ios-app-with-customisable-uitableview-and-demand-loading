@@ -10,6 +10,7 @@
 #import "MasterViewController.h"
 #import "ProfileViewController.h"
 #import "WebserviceViewController.h"
+#import "ImagePickerViewController.h"
 
 #import "IIViewDeckController.h"
 #import "AppDelegate.h"
@@ -89,6 +90,25 @@
     
     // defines the next view and hides the backbutton
     WebserviceViewController *newView = [[WebserviceViewController alloc] initWithNibName:@"WebserviceViewController" bundle:nil];
+    newView.navigationItem.hidesBackButton = YES;
+    
+    // pushes the next view onto stage
+    [objAppDelegate.navigationController pushViewController:newView animated:NO];
+    
+    // close the left panel
+    [self.viewDeckController closeLeftView];
+    
+}
+
+
+// button handler
+- (IBAction)imagePickerButtonTapHandler:(id)sender {
+    
+    // defines the app delegate
+    AppDelegate *objAppDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    // defines the next view and hides the backbutton
+    ImagePickerViewController *newView = [[ImagePickerViewController alloc] initWithNibName:@"ImagePickerViewController" bundle:nil];
     newView.navigationItem.hidesBackButton = YES;
     
     // pushes the next view onto stage

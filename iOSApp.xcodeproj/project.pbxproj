@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4635E3B11777CBC3008A6C36 /* ImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4635E3AF1777CBC3008A6C36 /* ImagePickerViewController.m */; };
+		4635E3B21777CBC3008A6C36 /* ImagePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4635E3B01777CBC3008A6C36 /* ImagePickerViewController.xib */; };
 		46592F6A1776CF5500E798A8 /* WebserviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46592F681776CF5400E798A8 /* WebserviceViewController.m */; };
 		46592F6B1776CF5500E798A8 /* WebserviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46592F691776CF5400E798A8 /* WebserviceViewController.xib */; };
 		46592F6E1776DF6400E798A8 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46592F6D1776DF6300E798A8 /* UIPlaceHolderTextView.m */; };
@@ -73,6 +75,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4635E3AE1777CBC3008A6C36 /* ImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerViewController.h; sourceTree = "<group>"; };
+		4635E3AF1777CBC3008A6C36 /* ImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerViewController.m; sourceTree = "<group>"; };
+		4635E3B01777CBC3008A6C36 /* ImagePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePickerViewController.xib; sourceTree = "<group>"; };
 		46592F671776CF5400E798A8 /* WebserviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebserviceViewController.h; sourceTree = "<group>"; };
 		46592F681776CF5400E798A8 /* WebserviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebserviceViewController.m; sourceTree = "<group>"; };
 		46592F691776CF5400E798A8 /* WebserviceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebserviceViewController.xib; sourceTree = "<group>"; };
@@ -265,6 +270,9 @@
 				46592F691776CF5400E798A8 /* WebserviceViewController.xib */,
 				46592F6C1776DF6300E798A8 /* UIPlaceHolderTextView.h */,
 				46592F6D1776DF6300E798A8 /* UIPlaceHolderTextView.m */,
+				4635E3AE1777CBC3008A6C36 /* ImagePickerViewController.h */,
+				4635E3AF1777CBC3008A6C36 /* ImagePickerViewController.m */,
+				4635E3B01777CBC3008A6C36 /* ImagePickerViewController.xib */,
 			);
 			path = iOSApp;
 			sourceTree = "<group>";
@@ -472,6 +480,7 @@
 				46E1D91E17758FCA00D58543 /* ProfileViewController.xib in Resources */,
 				46E1D9261775B88F00D58543 /* MenuViewController.xib in Resources */,
 				46592F6B1776CF5500E798A8 /* WebserviceViewController.xib in Resources */,
+				4635E3B21777CBC3008A6C36 /* ImagePickerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +540,7 @@
 				46592F6A1776CF5500E798A8 /* WebserviceViewController.m in Sources */,
 				46592F6E1776DF6400E798A8 /* UIPlaceHolderTextView.m in Sources */,
 				46592F72177707DC00E798A8 /* Reachability.m in Sources */,
+				4635E3B11777CBC3008A6C36 /* ImagePickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
