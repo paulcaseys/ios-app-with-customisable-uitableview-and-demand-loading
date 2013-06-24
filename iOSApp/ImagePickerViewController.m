@@ -116,14 +116,8 @@
     
     
     // remove overlay
-    //[self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
     
-    // Send post data
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-    if(image){
-        NSLog(@"asdf");
-    }
     
     
     // checks for internet connection
@@ -136,178 +130,110 @@
         //my web-dependent code
         NSLog(@"Internet connection IS available");
         
+        NSLog(@"POSTING DATA");
         
+        // creates an async queue, so the page can be displayed before loading is complete
+        dispatch_queue_t feedQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+        dispatch_async(feedQueue, ^{
+            
+            
+            // Send post data
+            UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+            NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+            
+            NSString *filename = [NSString stringWithFormat:@"something.png"];
+            
+            // random number for cachebusting
+            int randomNumber = arc4random() % 999999999;
+            
+            // need to parse the url because pipes in the url cause errors
+            NSString *unDecodedURL =[NSString stringWithFormat:@"http://cosmos.is:81/api/service/upload_image/"];
+            NSURL *decodedUrl = [NSURL URLWithString:[unDecodedURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+            
+            
+            // setting up the request object now
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setURL:decodedUrl];
+            [request setHTTPMethod:@"POST"];
+            
+            NSString *boundary = @"---------------------------14737809831466499882746641449";
+            NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+            [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+            
+            NSMutableData *body = [NSMutableData data];
+            
+            
+            
+            // file
+            [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; type=\"filedata\"; name=\"filedata\"; filename=\"%@\"\r\n", filename] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:imageData];
+            
+            
+            
+            // caption
+            [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"uploaded_image_caption\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"caption goes here"] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            
+            // image source
+            [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"uploaded_image_source\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"iOS App"] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            
+            // external reference string
+            [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"external_reference_string\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"autoincrement"] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            
+            // project name
+            [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"project_name\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"iOSAppProjectExample"] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            
+            // project password
+            [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"project_password\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"b816af010d9567864542020d6c7073ce"] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            
+            
+            // cacheBuster
+            [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"cacheBuster\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"1%d", randomNumber] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            
+            
+            [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r \n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            // setting the body of the post to the reqeust
+            [request setHTTPBody:body];
+            
+            // now lets make the connection to the web
+            
+            
+            NSURLResponse* response;
+            NSError* error;
+            NSData* result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            NSString *returnString = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
+            NSLog(@"return: %@",returnString);
+            
+
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                NSLog(@"loading complete!");
+                
+                
+            });
+            
+        });
         
-        
-        NSString *filename = [NSString stringWithFormat:@"something.png"];
-        
-        // random number for cachebusting
-        int randomNumber = arc4random() % 999999999;
-        
-        // need to parse the url because pipes in the url cause errors
-        NSString *unDecodedURL =[NSString stringWithFormat:@"http://cosmos.is:81/api/service/upload_image/"];
-        NSURL *decodedUrl = [NSURL URLWithString:[unDecodedURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
-        /*
-         NSLog(@"url: %@", unDecodedURL);
-         
-         
-         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:decodedUrl];
-         request.HTTPMethod = @"POST";
-         
-         
-         
-         
-         
-         
-         
-         NSString *boundary = @"---------------------------14737809831466499882746641449";
-         NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-         [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-         
-         NSMutableData *body = [NSMutableData data];
-         
-         
-         
-         // file
-         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; type=\"filedata\"; name=\"filedata\"; filename=\"%@\"\r\n", filename] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:imageData];
-         
-         
-         
-         // caption
-         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"uploaded_image_caption\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"caption goes here"] dataUsingEncoding:NSUTF8StringEncoding]];
-         
-         
-         // image source
-         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"uploaded_image_source\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"iOS App"] dataUsingEncoding:NSUTF8StringEncoding]];
-         
-         
-         // external reference string
-         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"external_reference_string\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"autoincrement"] dataUsingEncoding:NSUTF8StringEncoding]];
-         
-         
-         // project name
-         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"project_name\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"iOSAppProjectExample"] dataUsingEncoding:NSUTF8StringEncoding]];
-         
-         
-         // project password
-         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"project_password\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"b816af010d9567864542020d6c7073ce"] dataUsingEncoding:NSUTF8StringEncoding]];
-         
-         
-         
-         // cacheBuster
-         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"cacheBuster\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-         [body appendData:[[NSString stringWithFormat:@"1%d", randomNumber] dataUsingEncoding:NSUTF8StringEncoding]];
-         
-         
-         
-         [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r \n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-         
-         // setting the body of the post to the reqeust
-         [request setHTTPBody:body];
-         //[request setValue:@"" forHTTPHeaderField:@"Accept-Encoding"];
-         
-         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request
-         delegate:self];
-         if(connection) {
-         NSLog(@"hi");
-         NSMutableData *mutableData = [[NSMutableData alloc] init];
-         }
-         */
-        
-        // setting up the request object now
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL:decodedUrl];
-        [request setHTTPMethod:@"POST"];
-        
-        NSString *boundary = @"---------------------------14737809831466499882746641449";
-        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-        [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-        
-        NSMutableData *body = [NSMutableData data];
-        
-        
-        
-        // file
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; type=\"filedata\"; name=\"filedata\"; filename=\"%@\"\r\n", filename] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:imageData];
-        
-        
-        
-        // caption
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"uploaded_image_caption\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"caption goes here"] dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        
-        // image source
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"uploaded_image_source\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"iOS App"] dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        
-        // external reference string
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"external_reference_string\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"autoincrement"] dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        
-        // project name
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"project_name\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"iOSAppProjectExample"] dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        
-        // project password
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"project_password\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"b816af010d9567864542020d6c7073ce"] dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        
-        
-        // cacheBuster
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"cacheBuster\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"1%d", randomNumber] dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        
-        
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r \n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        // setting the body of the post to the reqeust
-        [request setHTTPBody:body];
-        
-        // now lets make the connection to the web
-        
-        
-        NSURLResponse* response;
-        NSError* error;
-        NSData* result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        NSString *returnString = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
-        NSLog(@"return: %@",returnString);
-        
-        /* */
-        
-        /*NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request
-         delegate:self
-         startImmediately:YES];
-         */
         
         
         
