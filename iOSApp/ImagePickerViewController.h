@@ -8,15 +8,29 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImagePickerViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate> {
+// google analytics
+#import "GAITrackedViewController.h"
+#import "GAI.h"
+
+#import "UIPlaceHolderTextView.h"
+
+
+
+@interface ImagePickerViewController : GAITrackedViewController<UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate> {
+    NSMutableDictionary *_object;
     UIImagePickerController *imagePickerController;
-    IBOutlet UIProgressView    *progressBar;
+    IBOutlet UILabel *errorLabel;
+    IBOutlet UIPlaceHolderTextView *texterPageTitle;
+    
 }
 
+@property (strong, nonatomic) NSMutableDictionary *_object;
 @property(nonatomic,retain)IBOutlet UIImageView *imageView;
 @property(nonatomic,retain)IBOutlet UIBarButtonItem *saveImageBotton;
+@property(nonatomic,retain)IBOutlet UIPlaceHolderTextView *texterPageTitle;
+@property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
+
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
-@property (readonly) IBOutlet UIProgressView    *progressBar;
 
 -(IBAction)showCameraAction:(id)sender;
 

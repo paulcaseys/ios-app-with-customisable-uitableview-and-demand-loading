@@ -183,7 +183,9 @@
     theTexter.layer.borderWidth = 0.0f;
 }
 
+
 // EVENT HANDLERS
+#pragma mark - Event handlers
 
 // side menu event handler
 - (void)drawerButtonPressed {

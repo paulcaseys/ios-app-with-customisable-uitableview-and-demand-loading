@@ -79,7 +79,9 @@
 
 
 
+
 // EVENT HANDLERS
+#pragma mark - Event handlers
 
 
 // side menu event handler
