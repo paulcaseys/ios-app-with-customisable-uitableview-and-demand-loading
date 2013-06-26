@@ -10,6 +10,12 @@
 		4635E3B11777CBC3008A6C36 /* ImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4635E3AF1777CBC3008A6C36 /* ImagePickerViewController.m */; };
 		4635E3B21777CBC3008A6C36 /* ImagePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4635E3B01777CBC3008A6C36 /* ImagePickerViewController.xib */; };
 		4635E3B6177ADF61008A6C36 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4635E3B5177ADF61008A6C36 /* Timer.m */; };
+		4635E3BF177AE333008A6C36 /* LoginHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4635E3BD177AE333008A6C36 /* LoginHomeViewController.m */; };
+		4635E3C0177AE333008A6C36 /* LoginHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4635E3BE177AE333008A6C36 /* LoginHomeViewController.xib */; };
+		4635E3C4177AE38B008A6C36 /* LoginNewAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4635E3C2177AE38B008A6C36 /* LoginNewAccountViewController.m */; };
+		4635E3C5177AE38B008A6C36 /* LoginNewAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4635E3C3177AE38B008A6C36 /* LoginNewAccountViewController.xib */; };
+		4635E3C9177AE446008A6C36 /* LoginEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4635E3C7177AE445008A6C36 /* LoginEntryViewController.m */; };
+		4635E3CA177AE446008A6C36 /* LoginEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4635E3C8177AE446008A6C36 /* LoginEntryViewController.xib */; };
 		46592F6A1776CF5500E798A8 /* WebserviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46592F681776CF5400E798A8 /* WebserviceViewController.m */; };
 		46592F6B1776CF5500E798A8 /* WebserviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46592F691776CF5400E798A8 /* WebserviceViewController.xib */; };
 		46592F6E1776DF6400E798A8 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46592F6D1776DF6300E798A8 /* UIPlaceHolderTextView.m */; };
@@ -81,6 +87,15 @@
 		4635E3B01777CBC3008A6C36 /* ImagePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePickerViewController.xib; sourceTree = "<group>"; };
 		4635E3B4177ADF61008A6C36 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		4635E3B5177ADF61008A6C36 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
+		4635E3BC177AE333008A6C36 /* LoginHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginHomeViewController.h; sourceTree = "<group>"; };
+		4635E3BD177AE333008A6C36 /* LoginHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginHomeViewController.m; sourceTree = "<group>"; };
+		4635E3BE177AE333008A6C36 /* LoginHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginHomeViewController.xib; sourceTree = "<group>"; };
+		4635E3C1177AE38A008A6C36 /* LoginNewAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginNewAccountViewController.h; sourceTree = "<group>"; };
+		4635E3C2177AE38B008A6C36 /* LoginNewAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginNewAccountViewController.m; sourceTree = "<group>"; };
+		4635E3C3177AE38B008A6C36 /* LoginNewAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginNewAccountViewController.xib; sourceTree = "<group>"; };
+		4635E3C6177AE445008A6C36 /* LoginEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginEntryViewController.h; sourceTree = "<group>"; };
+		4635E3C7177AE445008A6C36 /* LoginEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginEntryViewController.m; sourceTree = "<group>"; };
+		4635E3C8177AE446008A6C36 /* LoginEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginEntryViewController.xib; sourceTree = "<group>"; };
 		46592F671776CF5400E798A8 /* WebserviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebserviceViewController.h; sourceTree = "<group>"; };
 		46592F681776CF5400E798A8 /* WebserviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebserviceViewController.m; sourceTree = "<group>"; };
 		46592F691776CF5400E798A8 /* WebserviceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebserviceViewController.xib; sourceTree = "<group>"; };
@@ -287,6 +302,15 @@
 				4635E3AE1777CBC3008A6C36 /* ImagePickerViewController.h */,
 				4635E3AF1777CBC3008A6C36 /* ImagePickerViewController.m */,
 				4635E3B01777CBC3008A6C36 /* ImagePickerViewController.xib */,
+				4635E3BC177AE333008A6C36 /* LoginHomeViewController.h */,
+				4635E3BD177AE333008A6C36 /* LoginHomeViewController.m */,
+				4635E3BE177AE333008A6C36 /* LoginHomeViewController.xib */,
+				4635E3C1177AE38A008A6C36 /* LoginNewAccountViewController.h */,
+				4635E3C2177AE38B008A6C36 /* LoginNewAccountViewController.m */,
+				4635E3C3177AE38B008A6C36 /* LoginNewAccountViewController.xib */,
+				4635E3C6177AE445008A6C36 /* LoginEntryViewController.h */,
+				4635E3C7177AE445008A6C36 /* LoginEntryViewController.m */,
+				4635E3C8177AE446008A6C36 /* LoginEntryViewController.xib */,
 			);
 			path = iOSApp;
 			sourceTree = "<group>";
@@ -495,6 +519,9 @@
 				46E1D9261775B88F00D58543 /* MenuViewController.xib in Resources */,
 				46592F6B1776CF5500E798A8 /* WebserviceViewController.xib in Resources */,
 				4635E3B21777CBC3008A6C36 /* ImagePickerViewController.xib in Resources */,
+				4635E3C0177AE333008A6C36 /* LoginHomeViewController.xib in Resources */,
+				4635E3C5177AE38B008A6C36 /* LoginNewAccountViewController.xib in Resources */,
+				4635E3CA177AE446008A6C36 /* LoginEntryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +583,9 @@
 				46592F72177707DC00E798A8 /* Reachability.m in Sources */,
 				4635E3B11777CBC3008A6C36 /* ImagePickerViewController.m in Sources */,
 				4635E3B6177ADF61008A6C36 /* Timer.m in Sources */,
+				4635E3BF177AE333008A6C36 /* LoginHomeViewController.m in Sources */,
+				4635E3C4177AE38B008A6C36 /* LoginNewAccountViewController.m in Sources */,
+				4635E3C9177AE446008A6C36 /* LoginEntryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
