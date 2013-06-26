@@ -66,7 +66,9 @@
     
     // clears error text
     errorLabel.text = @"";
-        
+    
+    _object = [NSMutableDictionary dictionary];
+    
     [self openImagePicker];
     
 }
@@ -236,8 +238,8 @@
             NSError* error;
             NSData* result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
             
-            NSString *returnString = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
-            NSLog(@"return: %@",returnString);
+            //NSString *returnString = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
+            //NSLog(@"return: %@",returnString);
             
             NSDictionary* jsonResponse = [NSJSONSerialization
                                           JSONObjectWithData:result
@@ -248,38 +250,42 @@
             
 
             dispatch_sync(dispatch_get_main_queue(), ^{
-                NSLog(@"loading complete!");
-                NSString *uploaded_image_id = [jsonResponse valueForKey:@"uploaded_image_id"];
-                [_object setValue:uploaded_image_id forKey:@"uploaded_image_id"];
+                NSLog(@"loading complete: image upload!");
                 
-                NSString *uploaded_image_caption = [jsonResponse valueForKey:@"uploaded_image_caption"];
-                [_object setValue:uploaded_image_caption forKey:@"uploaded_image_caption"];
+                //NSLog(@"%@", jsonResponse);
                 
-                NSString *uploaded_image_source = [jsonResponse valueForKey:@"uploaded_image_source"];
-                [_object setValue:uploaded_image_source forKey:@"uploaded_image_source"];
-                                
-                NSString *uploaded_image_path_160 = [jsonResponse valueForKey:@"uploaded_image_path_160"];
-                [_object setValue:uploaded_image_path_160 forKey:@"uploaded_image_path_160"];
-                
-                NSLog(@"%@", uploaded_image_source);
-                NSLog(@"%@", uploaded_image_caption);
-                NSLog(@"%@", uploaded_image_path_160);
-                
-                //NSURL *imageURL = [NSURL URLWithString:[_object valueForKey:@"uploaded_image_path_160"]];
-                
-                [self loadImageThumbnail:uploaded_image_path_160];
-                
-                /*
-                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-                dispatch_async(queue, ^{
-                    NSData *data = [NSData dataWithContentsOfURL:imageURL];
-                    UIImage *image = [UIImage imageWithData:data];
-                    dispatch_sync(dispatch_get_main_queue(), ^{
-                        NSLog(@"imgloadded");
-                        thumbnailImageView.image = image;
+                for (NSMutableDictionary *itemFromGroup in jsonResponse){
+                    
+                    
+                    NSString *uploaded_image_id = [itemFromGroup valueForKey:@"uploaded_image_id"];
+                    [_object setObject:uploaded_image_id forKey:@"uploaded_image_id"];
+                    
+                    NSString *uploaded_image_caption = [itemFromGroup valueForKey:@"uploaded_image_caption"];
+                    [_object setObject:uploaded_image_caption forKey:@"uploaded_image_caption"];
+                    
+                    NSString *uploaded_image_source = [itemFromGroup valueForKey:@"uploaded_image_source"];
+                    [_object setObject:uploaded_image_source forKey:@"uploaded_image_source"];
+                    
+                    NSString *uploaded_image_path_160 = [itemFromGroup valueForKey:@"uploaded_image_path_160"];
+                    [_object setValue:uploaded_image_path_160 forKey:@"uploaded_image_path_160"];
+                    
+                    // loading thumbnail into page
+                    dispatch_queue_t queue2 = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+                    dispatch_async(queue2, ^{
+                        
+                        NSURL *url = [NSURL URLWithString:uploaded_image_path_160];
+                        NSData *data = [[NSData alloc]initWithContentsOfURL:url];
+                        UIImage *image = [[UIImage alloc]initWithData:data];
+                        if (data != nil) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                thumbnailImageView.image = image;
+                            });
+                        }
                     });
-                });
-                 */
+                    
+                    
+                }
+                
                 
             });
             
@@ -289,32 +295,9 @@
     
 }
 
-- (void)loadImageThumbnail:(NSString *)uploaded_image_path_160 {
-    //thumbnailImageView.image = [UIImage imageNamed:@"contact-me.jpg"];
-    
-    dispatch_queue_t queue2 = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-    dispatch_async(queue2, ^{
-        NSLog(@"%@", uploaded_image_path_160);
-        //NSURL *url = [NSURL URLWithString:uploaded_image_path_160];
-        //NSData *data = [[NSData alloc]initWithContentsOfURL:url];
-        /*UIImage *image = [[UIImage alloc]initWithData:data];
-        if (data != nil) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                thumbnailImageView.image = image;
-            });
-        }*/
-        /*NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[_object valueForKey:@"uploaded_image_path_160"]]];
-        UIImage *image = [UIImage imageWithData:data];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            thumbnailImageView.image = image;
-            NSLog(@"imgloadded");
-        });*/
-    });
-     
-}
 
 
-// example of entering data to cosmos
+// submitting item into project
 - (void)initialiseCosmosSubmission {
 	
     // checks for internet connection
@@ -355,7 +338,7 @@
                 NSURL *decodedUrl = [NSURL URLWithString:[unDecodedURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
                 NSData *url = [NSData dataWithContentsOfURL:decodedUrl];
                 
-                NSLog(@"url: %@", unDecodedURL);
+                //NSLog(@"url: %@", unDecodedURL);
                 
                 NSError *err;
                 
@@ -371,9 +354,12 @@
                         errorLabel.text = @"Unable to connect to server";
                         NSLog(@"NSError: %@", err);
                     } else {
-                        errorLabel.text = @"Form submitted, thankyou";
-                        NSString *refID = [jsonResponse valueForKey:@"unique_reference_id"];
-                        NSLog(@"unique_reference_id: %@", refID);
+                        NSLog(@"loading complete: form entry!");
+                        errorLabel.text = @"Finalising...";
+                        NSString *external_reference_string = [jsonResponse valueForKey:@"external_reference_string"];
+                        NSString *unique_reference_id = [jsonResponse valueForKey:@"unique_reference_id"];
+                        
+                        [self updateUploadedImage:unique_reference_id external_reference_string:external_reference_string];
                     }
                     
                 });
@@ -387,6 +373,86 @@
 }
 
 
+
+// updating the image reference, based on the item reference
+- (void)updateUploadedImage:(NSString *)unique_reference_id external_reference_string:(NSString *)external_reference_string {
+	
+    
+    // checks for internet connection
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus internetStatus = [reachability currentReachabilityStatus];
+    if (internetStatus == NotReachable) {
+        //there-is-no-connection warning
+        NSLog(@"Internet connection NOT available");
+        errorLabel.text = @"Internet connection unavailable";
+        
+    } else {
+        //my web-dependent code
+        NSLog(@"Internet connection IS available");
+        
+        
+        // checks if the required fields are complete
+        BOOL formErrors = [self validateForm];
+        
+        if (formErrors){
+            //errorLabel.text = @"Please complete the form";
+        } else {
+            //errorLabel.text = @"Submitting form";
+            
+            // creates an async queue, so the page can be displayed before loading is complete
+            dispatch_queue_t feedQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+            dispatch_async(feedQueue, ^{
+                
+                // define form values
+                //NSString *page_title = texterPageTitle.text;
+                
+                
+                // random number for cachebusting
+                int randomNumber = arc4random() % 999999999;
+                
+                
+                NSString *uploaded_image_id = [_object valueForKey:@"uploaded_image_id"];
+                NSString *uploaded_image_caption = [_object valueForKey:@"uploaded_image_caption"];
+                NSString *uploaded_image_source = [_object valueForKey:@"uploaded_image_source"];
+                                
+                // need to parse the url because pipes in the url cause errors
+                NSString *unDecodedURL =[NSString stringWithFormat:@"http://cosmos.is/api/service/update_uploaded_image/format/json/?project_name=iOSAppProjectExample&project_password=b816af010d9567864542020d6c7073ce&external_reference_string=%@&unique_reference_id=%@&uploaded_image_id=%@&uploaded_image_caption=%@&uploaded_image_source=%@?cachebuster=%d", external_reference_string, unique_reference_id, uploaded_image_id, uploaded_image_caption, uploaded_image_source, randomNumber];
+                NSURL *decodedUrl = [NSURL URLWithString:[unDecodedURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+                NSData *url = [NSData dataWithContentsOfURL:decodedUrl];
+                
+                //NSLog(@"url: %@", unDecodedURL);
+                
+                NSError *err;
+                
+                NSDictionary* jsonResponse = [NSJSONSerialization
+                                              JSONObjectWithData:url
+                                              options:kNilOptions
+                                              error:&err];
+                
+                // all loaded
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    
+                    if (!jsonResponse) {
+                        errorLabel.text = @"Unable to connect to server";
+                        NSLog(@"NSError: %@", err);
+                    } else {
+                        
+                        errorLabel.text = @"Image uploaded";
+                        NSLog(@"loading complete: upadting image details to include item references!");
+                        //NSLog(@"jsonResponse: %@", jsonResponse);
+                        
+                    }
+                    
+                });
+                
+            });
+            
+        }
+        
+    }
+    
+}
+
 // FORM VALIDATION
 // returns over 0, if there is an error
 - (BOOL)validateForm {
@@ -398,10 +464,10 @@
     
     //[self removeInvalidStyle:texterPageTitle];
     
-    if([texterPageTitle.text isEqualToString:@""]){
+    /*if([texterPageTitle.text isEqualToString:@""]){
         formErrors = YES;
         //[self addInvalidStyle:texterPageTitle];
-    }
+    }*/
     return formErrors;
     
     
