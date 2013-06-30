@@ -37,7 +37,7 @@
     // Do any additional setup after loading the view from its nib.
     
     
-    self.title = @"webservice";
+    self.title = @"new account";
     
     // placeholders in textfields
 	[texterUsername setPlaceholder:@"Username"];

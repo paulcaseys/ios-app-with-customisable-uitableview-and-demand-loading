@@ -34,12 +34,10 @@
     // Do any additional setup after loading the view from its nib.
     
     // menu button
-    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[UIImage imageNamed:@"drawer.png"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(drawerButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [button setFrame:CGRectMake(0, 0, 52, 44)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
+    // adds the next button
+    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"close" style:UIBarButtonItemStylePlain target:self action:@selector(closeModalButtonPressed)];
+    self.navigationItem.leftBarButtonItem = anotherButton;
 
 }
 
@@ -54,9 +52,10 @@
 #pragma mark - Event handlers
 
 // side menu event handler
-- (void)drawerButtonPressed {
+- (void)closeModalButtonPressed {
     [self.view endEditing:YES];
-    [self.viewDeckController toggleLeftViewAnimated:YES];
+    //[self.viewDeckController toggleLeftViewAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 // button event handler

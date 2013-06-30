@@ -127,12 +127,20 @@
     // defines the app delegate
     AppDelegate *objAppDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:0.4];
+    // here I put the code to set the posting button off the top of the view
+    [UIView commitAnimations];
+    
     // defines the next view and hides the backbutton
     LoginHomeViewController *newView = [[LoginHomeViewController alloc] initWithNibName:@"LoginHomeViewController" bundle:nil];
     newView.navigationItem.hidesBackButton = YES;
     
+    UINavigationController *newNavController = [[UINavigationController alloc] initWithRootViewController:newView];
+    
     // pushes the next view onto stage
-    [objAppDelegate.navigationController pushViewController:newView animated:NO];
+    [objAppDelegate.navigationController presentModalViewController:newNavController animated:YES];
     
     // close the left panel
     [self.viewDeckController closeLeftView];
