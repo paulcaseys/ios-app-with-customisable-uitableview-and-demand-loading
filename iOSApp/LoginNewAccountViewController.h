@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginNewAccountViewController : UIViewController
+// google analytics
+#import "GAITrackedViewController.h"
+#import "GAI.h"
+
+
+@interface LoginNewAccountViewController : GAITrackedViewController {
+    NSMutableDictionary *_object;
+    UIImagePickerController *imagePickerController;
+    IBOutlet UILabel *errorLabel;
+    IBOutlet UITextField *texterUsername;
+    IBOutlet UITextField *texterPassword;
+    IBOutlet UITextField *texterEmail;
+}
+
+@property (strong, nonatomic) NSMutableDictionary *_object;
 
 @end

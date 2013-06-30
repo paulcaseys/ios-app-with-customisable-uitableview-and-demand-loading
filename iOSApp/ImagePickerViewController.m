@@ -188,8 +188,7 @@
             [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; type=\"filedata\"; name=\"filedata\"; filename=\"%@\"\r\n", filename] dataUsingEncoding:NSUTF8StringEncoding]];
             [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
             [body appendData:imageData];
-            
-            
+                        
             
             // caption
             [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -387,7 +386,7 @@
                 NSURL *decodedUrl = [NSURL URLWithString:[unDecodedURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
                 NSData *url = [NSData dataWithContentsOfURL:decodedUrl];
                 
-                NSLog(@"url: %@", unDecodedURL);
+                //NSLog(@"url: %@", unDecodedURL);
                 
                 NSError *err;
                 

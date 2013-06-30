@@ -7,6 +7,8 @@
 //
 
 #import "LoginHomeViewController.h"
+#import "LoginNewAccountViewController.h"
+#import "LoginEntryViewController.h"
 
 #import "IIViewDeckController.h"
 #import "Reachability.h"
@@ -55,6 +57,41 @@
 - (void)drawerButtonPressed {
     [self.view endEditing:YES];
     [self.viewDeckController toggleLeftViewAnimated:YES];
+}
+
+// button event handler
+- (IBAction)registerButtonPressed:(id)sender {
+    if (!self.loginNewAccountViewController) {
+        self.loginNewAccountViewController = [[LoginNewAccountViewController alloc] initWithNibName:@"LoginNewAccountViewController" bundle:nil];
+    }
+    // traverses arrays to find the object
+    NSMutableDictionary *object = [[NSMutableDictionary alloc] init];
+    
+    // custom back button text
+    NSString *backButtonText = @"back";
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: backButtonText style: UIBarButtonItemStyleBordered target: nil action: nil];
+    [[self navigationItem] setBackBarButtonItem: newBackButton];
+    
+    self.loginNewAccountViewController._object = object;
+    [self.navigationController pushViewController:self.loginNewAccountViewController animated:YES];
+    
+}
+
+// button event handler
+- (IBAction)loginButtonPressed:(id)sender {
+    if (!self.loginEntryViewController) {
+        self.loginEntryViewController = [[LoginEntryViewController alloc] initWithNibName:@"LoginEntryViewController" bundle:nil];
+    }
+    // traverses arrays to find the object
+    NSMutableDictionary *object = [[NSMutableDictionary alloc] init];
+    
+    // custom back button text
+    NSString *backButtonText = @"back";
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: backButtonText style: UIBarButtonItemStyleBordered target: nil action: nil];
+    [[self navigationItem] setBackBarButtonItem: newBackButton];
+    
+    self.loginEntryViewController._object = object;
+    [self.navigationController pushViewController:self.loginEntryViewController animated:YES];
 }
 
 

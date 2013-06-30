@@ -195,7 +195,6 @@
 
 
 - (IBAction)submitFormButtonTapHandler:(id)sender {
-    NSLog(@"hello");
     [self.view endEditing:YES];
     [self initialiseCosmosSubmission];
     //[self.viewDeckController toggleLeftViewAnimated:YES];

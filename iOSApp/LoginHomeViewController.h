@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginHomeViewController : UIViewController
+// google analytics
+#import "GAITrackedViewController.h"
+#import "GAI.h"
+
+@class LoginNewAccountViewController;
+@class LoginEntryViewController;
+
+@interface LoginHomeViewController : GAITrackedViewController {
+    
+}
+
+@property (strong, nonatomic) LoginNewAccountViewController *loginNewAccountViewController;
+@property (strong, nonatomic) LoginEntryViewController *loginEntryViewController;
+
+- (IBAction)registerButtonPressed:(id)sender;
+- (IBAction)loginButtonPressed:(id)sender;
 
 @end
