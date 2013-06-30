@@ -146,6 +146,7 @@
                         if([Response isEqual: @"correct"]){
                             NSLog(@"SUCCESS: password correct");
                             errorLabel.text = @"Password correct";
+                            [self dismissModalViewControllerAnimated:YES];
                             
                         } else {
                             NSLog(@"ERROR: password or username is not correct");
