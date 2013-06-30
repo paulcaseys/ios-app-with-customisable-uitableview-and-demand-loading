@@ -53,7 +53,7 @@
     [texterUsername becomeFirstResponder];
     
     // adds the next button
-    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"sign in" style:UIBarButtonItemStylePlain target:self action:@selector(initialiseCosmosSubmission)];
+    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"sign in" style:UIBarButtonItemStylePlain target:self action:@selector(initialiseLogin)];
     self.navigationItem.rightBarButtonItem = anotherButton;
 }
 
@@ -64,8 +64,8 @@
 }
 
 
-// submitting item into project
-- (void)initialiseCosmosSubmission {
+// logging in
+- (void)initialiseLogin {
 	
     // checks for internet connection
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
@@ -86,7 +86,7 @@
         if (formErrors){
             errorLabel.text = @"Please complete all fields";
         } else {
-            errorLabel.text = @"Creating account...";
+            errorLabel.text = @"Logging in...";
             
             // creates an async queue, so the page can be displayed before loading is complete
             dispatch_queue_t feedQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
