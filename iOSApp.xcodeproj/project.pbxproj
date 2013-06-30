@@ -16,6 +16,7 @@
 		4635E3C5177AE38B008A6C36 /* LoginNewAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4635E3C3177AE38B008A6C36 /* LoginNewAccountViewController.xib */; };
 		4635E3C9177AE446008A6C36 /* LoginEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4635E3C7177AE445008A6C36 /* LoginEntryViewController.m */; };
 		4635E3CA177AE446008A6C36 /* LoginEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4635E3C8177AE446008A6C36 /* LoginEntryViewController.xib */; };
+		4635E3CE17800432008A6C36 /* NSDictionary+QueryStringBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4635E3CD17800432008A6C36 /* NSDictionary+QueryStringBuilder.m */; };
 		46592F6A1776CF5500E798A8 /* WebserviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46592F681776CF5400E798A8 /* WebserviceViewController.m */; };
 		46592F6B1776CF5500E798A8 /* WebserviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46592F691776CF5400E798A8 /* WebserviceViewController.xib */; };
 		46592F6E1776DF6400E798A8 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46592F6D1776DF6300E798A8 /* UIPlaceHolderTextView.m */; };
@@ -96,6 +97,8 @@
 		4635E3C6177AE445008A6C36 /* LoginEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginEntryViewController.h; sourceTree = "<group>"; };
 		4635E3C7177AE445008A6C36 /* LoginEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginEntryViewController.m; sourceTree = "<group>"; };
 		4635E3C8177AE446008A6C36 /* LoginEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginEntryViewController.xib; sourceTree = "<group>"; };
+		4635E3CC17800432008A6C36 /* NSDictionary+QueryStringBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryStringBuilder.h"; sourceTree = "<group>"; };
+		4635E3CD17800432008A6C36 /* NSDictionary+QueryStringBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+QueryStringBuilder.m"; sourceTree = "<group>"; };
 		46592F671776CF5400E798A8 /* WebserviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebserviceViewController.h; sourceTree = "<group>"; };
 		46592F681776CF5400E798A8 /* WebserviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebserviceViewController.m; sourceTree = "<group>"; };
 		46592F691776CF5400E798A8 /* WebserviceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebserviceViewController.xib; sourceTree = "<group>"; };
@@ -224,6 +227,16 @@
 			path = iOSApp/Frameworks/Timer;
 			sourceTree = "<group>";
 		};
+		4635E3CB17800432008A6C36 /* QueryStringBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				4635E3CC17800432008A6C36 /* NSDictionary+QueryStringBuilder.h */,
+				4635E3CD17800432008A6C36 /* NSDictionary+QueryStringBuilder.m */,
+			);
+			name = QueryStringBuilder;
+			path = iOSApp/Frameworks/QueryStringBuilder;
+			sourceTree = "<group>";
+		};
 		46592F6F177707DC00E798A8 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +272,7 @@
 		4672C5C5177017F400430C1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4635E3CB17800432008A6C36 /* QueryStringBuilder */,
 				4635E3B3177ADF61008A6C36 /* Timer */,
 				46592F6F177707DC00E798A8 /* Reachability */,
 				46E1D90817757CF600D58543 /* ViewDeck */,
@@ -586,6 +600,7 @@
 				4635E3BF177AE333008A6C36 /* LoginHomeViewController.m in Sources */,
 				4635E3C4177AE38B008A6C36 /* LoginNewAccountViewController.m in Sources */,
 				4635E3C9177AE446008A6C36 /* LoginEntryViewController.m in Sources */,
+				4635E3CE17800432008A6C36 /* NSDictionary+QueryStringBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
