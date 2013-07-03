@@ -46,6 +46,15 @@
 	[texterPassword setPlaceholder:@"Password"];
     [texterPassword setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
     
+    // Get the stored data before the view loads
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"external_reference_string"] != nil) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *external_reference_string = [defaults objectForKey:@"external_reference_string"];
+        //NSString *detail_Password = [defaults objectForKey:@"detail_Password"];
+    
+        texterUsername.text = external_reference_string;
+    }
+    
     // adds error label
     errorLabel.text = @"";
     
@@ -146,6 +155,13 @@
                         if([Response isEqual: @"correct"]){
                             NSLog(@"SUCCESS: password correct");
                             errorLabel.text = @"Password correct";
+                            
+                            // saves app 'cookies'
+                            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                            [defaults setObject:external_reference_string forKey:@"external_reference_string"];
+                            [defaults setObject:detail_Password forKey:@"detail_Password"];
+                            [defaults synchronize];
+                            
                             [self dismissModalViewControllerAnimated:YES];
                             
                         } else {

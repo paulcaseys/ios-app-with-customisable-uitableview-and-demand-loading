@@ -189,6 +189,13 @@
                         if([type_of_unique_reference_data isEqual: @"a new unique_reference was inserted"]){
                             NSLog(@"SUCCESS: username is unique");
                             errorLabel.text = @"New account created! Please wait while signing in...";
+                            
+                            // saves app 'cookies' 
+                            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                            [defaults setObject:external_reference_string forKey:@"external_reference_string"];
+                            [defaults setObject:detail_Password forKey:@"detail_Password"];
+                            [defaults synchronize];
+                            
                             [self initialiseLogin];
                             
                         } else {
