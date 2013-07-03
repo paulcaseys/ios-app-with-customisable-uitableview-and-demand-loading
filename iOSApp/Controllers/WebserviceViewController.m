@@ -8,6 +8,8 @@
 
 #import "WebserviceViewController.h"
 
+#import "NSDictionary+QueryStringBuilder.h"
+
 #import "IIViewDeckController.h"
 #import "Reachability.h"
 
@@ -105,9 +107,56 @@
                 
                 // random number for cachebusting
                 int randomNumber = arc4random() % 999999999;
+                NSString *randomNumberString = [NSString stringWithFormat:@"%i", randomNumber];
+                
+                // defining parameters
+                NSDictionary *queryParameters = @{@"project_name" : @"iOSAppProjectExample",
+                                                  @"project_password" : @"b816af010d9567864542020d6c7073ce",
+                                                  @"external_reference_string" : @"",
+                                                  @"cosmos_force" : @"",
+                                                  @"cacheBuster" : randomNumberString,
+                                                  
+                                                  @"detail_MessageId" : @"",
+                                                  @"detail_ImageFile" : @"",
+                                                  @"detail_ImageDescription" : @"",
+                                                  @"detail_Name" : @"",
+                                                  @"detail_FirstName" : details_firstName,
+                                                  @"detail_LastName" : details_lastName,
+                                                  @"detail_HomePhoneNumber" : @"",
+                                                  @"detail_EmailAddress" : @"",
+                                                  @"detail_Address" : @"",
+                                                  @"detail_Address2" : @"",
+                                                  @"detail_Suburb" : @"",
+                                                  @"detail_Postcode" : @"",
+                                                  @"detail_State" : @"",
+                                                  @"detail_Country" : @"",
+                                                  @"detail_DateOfBirth" : @"",
+                                                  @"detail_Gen1" : @"true",
+                                                  @"detail_Gen2" : @"false",
+                                                  @"detail_Gen3" : @"",
+                                                  @"detail_Gen4" : @"",
+                                                  @"detail_Gen5" : @"",
+                                                  @"detail_Gen6" : @"",
+                                                  @"detail_Gen7" : @"",
+                                                  @"detail_Gen8" : @"",
+                                                  @"detail_Gen9" : @"",
+                                                  @"detail_Gen10" : @"",
+                                                  @"detail_Password" : @"",
+                                                  @"classification_1" : @"",
+                                                  @"classification_2" : @"",
+                                                  @"classification_3" : @"",
+                                                  @"classification_4" : @"",
+                                                  @"classification_5" : @"",
+                                                  @"page_title" : @"",
+                                                  @"page_summary" : @"",
+                                                  @"page_body_text" : @"",
+                                                  @"page_image_url" : @"",
+                                                  @"detail_Hook1" : @"",
+                                                  @"detail_Hook2" : @"",
+                                                  @"detail_Hook3" : @""};
                 
                 // need to parse the url because pipes in the url cause errors
-                NSString *unDecodedURL =[NSString stringWithFormat:@"http://cosmos.is/api/service/save/format/json/?detail_MessageId=&detail_ImageFile=&detail_ImageDescription=&detail_DateReceived=&detail_Name=&detail_FirstName=%@&detail_LastName=%@&detail_HomePhoneNumber=+&detail_EmailAddress=+&detail_Address=+&detail_Address2=&detail_Suburb=&detail_Postcode=+&detail_State=+&detail_Country=&detail_DateOfBirth=&detail_Gen1=true&detail_Gen2=false&detail_Gen3=&detail_Gen4=&detail_Gen5=&detail_Gen6=&detail_Gen7=&detail_Gen8=&detail_Gen9=&detail_Gen10=&classification_1=&classification_2=&classification_3=&classification_4=&classification_5=&page_title=&page_summary=&page_body_text=&page_image_url=&project_name=iOSAppProjectExample&project_password=b816af010d9567864542020d6c7073ce&external_reference_string=&cosmos_force=1&cacheBuster=%d", details_firstName, details_lastName, randomNumber];
+                NSString *unDecodedURL =[NSString stringWithFormat:@"http://cosmos.is:81/api/service/save/format/json/%@", [queryParameters queryString]];
                 NSURL *decodedUrl = [NSURL URLWithString:[unDecodedURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
                 NSData *url = [NSData dataWithContentsOfURL:decodedUrl];
                 

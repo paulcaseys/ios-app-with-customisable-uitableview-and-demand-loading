@@ -14,6 +14,8 @@
 #import "IIViewDeckController.h"
 #import "Reachability.h"
 
+#import "NSDictionary+QueryStringBuilder.h"
+
 #include <stdlib.h>
 
 BOOL animationRunning;
@@ -135,9 +137,25 @@ int section;
             
             // random number for cachebusting
             int randomNumber = arc4random() % 999999999;
+            NSString *randomNumberString = [NSString stringWithFormat:@"%i", randomNumber];
+            
+            // defining parameters
+            NSDictionary *queryParameters = @{@"project_name" : @"SummerAtTarget",
+                                              @"project_password" : @"6CB4816A23A965B5DFD58E45F4C23",
+                                              @"external_reference_string" : @"",
+                                              @"cosmos_force" : @"",
+                                              @"cacheBuster" : randomNumberString,
+                                              
+                                              @"table" : @"unique_references",
+                                              @"batch" : @"1",
+                                              @"batchSize" : @"6",
+                                              @"whereConditionArray" : @"project_id||9",
+                                              @"select" : @"*",
+                                              @"orderBy" : @"vote_count||desc"
+                                              };
             
             // need to parse the url because pipes in the url cause errors
-            NSString *unDecodedURL =[NSString stringWithFormat:@"http://cosmos.is/api/service/data/format/json/?project_name=SummerAtTarget&project_password=6CB4816A23A965B5DFD58E45F4C23&table=unique_references&batch=1&batchSize=6&whereConditionArray=project_id||9&select=*&orderBy=vote_count||desc&cacheBuster=%d", randomNumber];
+            NSString *unDecodedURL =[NSString stringWithFormat:@"http://cosmos.is:81/api/service/data/format/json/%@", [queryParameters queryString]];
             NSURL *decodedUrl = [NSURL URLWithString:[unDecodedURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
             NSData *url = [NSData dataWithContentsOfURL:decodedUrl];
             
